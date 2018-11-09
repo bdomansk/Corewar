@@ -14,7 +14,7 @@ NAME = ../asm
 LIB = ../libft/libft.a
 LIBDIR = ../libft
 FLAGS = -Wall -Wextra -Werror
-ASM_SRC = main.c 
+ASM_SRC = main.c bonuses.c init_info.c put_manual.c error.c
 ASM_OBJ = $(ASM_SRC:.c=.o)
 HEADER = -I ../includes
 DEL = /bin/rm -f

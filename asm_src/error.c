@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2018/11/08 16:14:23 by bdomansk          #+#    #+#             */
+/*   Updated: 2018/11/08 16:14:26 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int	main(int argc, char **argv)
+void	error(t_asm *info)
 {
-	t_asm *info;
-
-	info = init_info(argc, argv);
-	bonuses(info);
-	return (0);
+	if (info->flags->m)
+		system("afplay music/fail-trombone.mp3&");
+	if (info->flags->c)
+		ft_printf("%s", RED);
+	if (info->flags->e)
+		ft_printf("ERROR: %s\n", info->error_reason);
+	else
+		ft_printf("ERROR\n");
+	if (info->flags->c)
+		ft_printf("%s", DEF);
+	if (!info->flags->h)
+	{
+		if (info->flags->l)
+			system("leaks asm");
+		exit(1);
+	}
 }

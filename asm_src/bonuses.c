@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonuses.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2018/11/08 13:57:18 by bdomansk          #+#    #+#             */
+/*   Updated: 2018/11/08 13:57:21 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int	main(int argc, char **argv)
+void	bonuses(t_asm *info)
 {
-	t_asm *info;
-
-	info = init_info(argc, argv);
-	bonuses(info);
-	return (0);
+	if (info->flags->l)
+		system("leaks asm");
+	if (info->flags->m)
+		system("killall afplay");
 }

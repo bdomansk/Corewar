@@ -13,6 +13,35 @@
 #ifndef ASM_H
 # define ASM_H
 # include "../libft/libft.h"
+# include "op.h"
 
+typedef struct	s_flags
+{
+	int	h;
+	int e;
+	int l;
+	int	c;
+	int d;
+	int	m;
+	int exists;
+}				t_flags;
+
+typedef struct	s_lines
+{
+	char			*line;
+	struct s_lines	*next;
+}				t_lines;
+
+typedef struct	s_asm
+{
+	t_flags		*flags;
+	t_lines		*lines;
+	char		*error_reason;
+}				t_asm;
+
+t_asm			*init_info(int argc, char **argv);
+void			put_manual(t_asm *info);
+void			error(t_asm *info);
+void			bonuses(t_asm *info);
 
 #endif
