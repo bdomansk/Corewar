@@ -22,7 +22,6 @@ void	put_manual(t_asm *info)
 	ft_printf("usage:	./asm [-helcdm] champion[.s or .cor]\n\
 	-h see the usage\n\
 	-m turn on musical accompaniment\n\
-	-e errors management\n\
 	-l show leaks\n\
 	-c enable colors\n\
 	-d disassembler\n");

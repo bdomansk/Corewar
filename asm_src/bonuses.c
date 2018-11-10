@@ -14,6 +14,11 @@
 
 void	bonuses(t_asm *info)
 {
+	if (info->flags->c)
+		ft_printf("%s", GREEN);
+	ft_printf("Writing output program to %s\n", info->new_file_name);
+	if (info->flags->c)
+		ft_printf("%s", DEF);
 	if (info->flags->l)
 		system("leaks asm");
 	if (info->flags->m)

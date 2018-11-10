@@ -14,9 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	t_asm *info;
+	t_asm	*info;
 
 	info = init_info(argc, argv);
+	check_file_name(info);
 	bonuses(info);
 	return (0);
 }

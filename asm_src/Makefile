@@ -6,7 +6,7 @@
 #    By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/23 11:55:49 by bdomansk          #+#    #+#              #
-#    Updated: 2018/04/23 11:55:51 by bdomansk         ###   ########.fr        #
+#    Updated: 2018/11/09 11:37:55 by bdomansk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = ../asm
 LIB = ../libft/libft.a
 LIBDIR = ../libft
 FLAGS = -Wall -Wextra -Werror
-ASM_SRC = main.c bonuses.c init_info.c put_manual.c error.c
+ASM_SRC = main.c bonuses.c init_info.c put_manual.c check_file_name.c \
+		  error.c
 ASM_OBJ = $(ASM_SRC:.c=.o)
 HEADER = -I ../includes
 DEL = /bin/rm -f

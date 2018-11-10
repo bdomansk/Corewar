@@ -18,10 +18,7 @@ void	error(t_asm *info)
 		system("afplay music/fail-trombone.mp3&");
 	if (info->flags->c)
 		ft_printf("%s", RED);
-	if (info->flags->e)
-		ft_printf("ERROR: %s\n", info->error_reason);
-	else
-		ft_printf("ERROR\n");
+	ft_printf("ERROR: %s\n", info->error_reason);
 	if (info->flags->c)
 		ft_printf("%s", DEF);
 	if (!info->flags->h)
