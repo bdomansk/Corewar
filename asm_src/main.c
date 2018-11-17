@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 
 	info = init_info(argc, argv);
 	check_file_name(info);
+	//тут нужно добавить выбор для флага -d
+	check_name_and_comment(info);
 	bonuses(info);
 	return (0);
 }

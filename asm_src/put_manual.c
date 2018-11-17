@@ -24,6 +24,8 @@ void	put_manual(t_asm *info)
 	-m turn on musical accompaniment\n\
 	-l show leaks\n\
 	-c enable colors\n\
+	-i a new file is created in the current directory\n\
+	-n show the number of line where the error occurred\n\
 	-d disassembler\n");
 	if (info->flags->c)
 		ft_printf("%s", DEF);

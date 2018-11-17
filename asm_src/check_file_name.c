@@ -19,6 +19,8 @@ static void	get_new_name(t_asm *info, char *extension)
 	char	*new_extension;
 
 	new_extension = (info->flags->d) ? ".s" : ".cor";
+	if (info->flags->i && ft_strrchr(info->file_name, '/'))
+		info->file_name = ft_strrchr(info->file_name, '/') + 1;
 	len = ft_strlen(info->file_name) - ft_strlen(extension);
 	new = ft_strnew(len);
 	new = ft_strncpy(new, info->file_name, len);
