@@ -84,8 +84,8 @@ void		check_name_and_comment(t_asm *info)
 
 	flag_comment = 0;
 	flag_name = 0;
-	while (get_next_line(info->fd, &info->line) > 0 &&
-		(!flag_name || !flag_comment))
+	while ((!flag_name || !flag_comment) &&
+		get_next_line(info->fd, &info->line) > 0)
 	{
 		info->num_line++;
 		if (is_champion_name(info->line))

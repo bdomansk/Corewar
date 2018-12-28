@@ -72,6 +72,7 @@ t_asm			*init_info(int argc, char **argv)
 	info->magic = COREWAR_EXEC_MAGIC;
 	info->file_name = argv[info->flags->exists + 1];
 	info->line = NULL;
+	info->command = NULL;
 	info->num_line = 0;
 	return (info);
 }

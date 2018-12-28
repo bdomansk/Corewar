@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_contains_label.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2018/11/27 18:09:58 by bdomansk          #+#    #+#             */
+/*   Updated: 2018/11/27 18:10:02 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static void	assembler(t_asm *info)
+int	is_contains_label(char *s, int i)
 {
-	check_name_and_comment(info);
-	check_commands_and_labels(info);
-	check_end_of_file(info);
-}
+	int start;
 
-static void	disassembler(t_asm *info)
-{
-	ft_printf("disassembler for %s\n", info->file_name);
-}
-
-int			main(int argc, char **argv)
-{
-	t_asm	*info;
-
-	info = init_info(argc, argv);
-	check_file_name(info);
-	(info->flags->d) ? disassembler(info) : assembler(info);
-	bonuses(info);
+	start = i;
+	while (s[i] && s[i] != LABEL_CHAR)
+	{
+		if (!ft_strchr(LABEL_CHARS, s[i]))
+			return (0);
+		i++;
+	}
+	if (i != start && s[i] == LABEL_CHAR)
+		return (1);
 	return (0);
 }

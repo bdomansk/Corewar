@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   find_opcode.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2018/12/01 17:23:40 by bdomansk          #+#    #+#             */
+/*   Updated: 2018/12/01 17:23:42 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static void	assembler(t_asm *info)
+int	find_opcode(char *s, int start)
 {
-	check_name_and_comment(info);
-	check_commands_and_labels(info);
-	check_end_of_file(info);
-}
+	char	*name;
+	int		i;
+	int		j;
+	int		k;
 
-static void	disassembler(t_asm *info)
-{
-	ft_printf("disassembler for %s\n", info->file_name);
-}
-
-int			main(int argc, char **argv)
-{
-	t_asm	*info;
-
-	info = init_info(argc, argv);
-	check_file_name(info);
-	(info->flags->d) ? disassembler(info) : assembler(info);
-	bonuses(info);
+	i = 0;
+	while (g_operations[i].name)
+	{
+		name = g_operations[i].name;
+		j = 0;
+		k = start;
+		while (s[k] && name[j] && s[k++] == name[j])
+			j++;
+		if (!name[j] && (!s[k] || s[k] == ' ' || s[k] == '\t' ||
+			s[k] == '%' || s[k] == '-' || ft_isdigit(s[k])))
+			return (g_operations[i].opcode);
+		i++;
+	}
 	return (0);
 }
