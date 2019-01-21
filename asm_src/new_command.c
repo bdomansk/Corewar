@@ -25,6 +25,8 @@ t_command	*new_command(t_asm *info)
 	new->label = NULL;
 	new->name = NULL;
 	new->next = NULL;
+	new->args = NULL;
+	new->arg = NULL;
 	if (!start)
 		start = new;
 	else

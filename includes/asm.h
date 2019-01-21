@@ -21,26 +21,27 @@ typedef struct	s_operations
 {
 	char	*name;
 	int		opcode;
+	int		number_args;
 }				t_operations;
 
 static t_operations g_operations[17] = {
-{"live", 1},
-{"ld", 2},
-{"st", 3},
-{"add", 4},
-{"sub", 5},
-{"and", 6},
-{"or", 7},
-{"xor", 8},
-{"zjmp", 9},
-{"ldi", 10},
-{"sti", 11},
-{"fork", 12},
-{"lld", 13},
-{"lldi", 14},
-{"lfork", 15},
-{"aff", 16},
-{NULL, 0}
+{"live", 1, 1},
+{"ld", 2, 2},
+{"st", 3, 2},
+{"add", 4, 3},
+{"sub", 5, 3},
+{"and", 6, 3},
+{"or", 7, 3},
+{"xor", 8, 3},
+{"zjmp", 9, 1},
+{"ldi", 10, 3},
+{"sti", 11, 3},
+{"fork", 12, 1},
+{"lld", 13, 2},
+{"lldi", 14, 3},
+{"lfork", 15, 1},
+{"aff", 16, 1},
+{NULL, 0, 0}
 };
 
 typedef struct	s_flags
@@ -61,11 +62,19 @@ typedef struct			s_label
 	struct s_label		*next;
 }						t_label;
 
+typedef struct			s_arg
+{
+	char				*content;
+	struct s_arg		*next;
+}						t_arg;
+
 typedef struct			s_command
 {
 	char				*name;
+	char				**args;
 	int					opcode;
 	t_label 			*label;
+	t_arg				*arg;
 	struct s_command	*next;
 }						t_command;
 
@@ -105,8 +114,15 @@ int				is_empty_line(char *s, int *i);
 int 			is_contains_label(char *s, int i);
 int 			is_contains_command(char *s, int i);
 int				find_opcode(char *s, int start);
-t_command		*new_command(t_asm *info);
 void			add_labels(t_asm *info, t_command *new, int *i);
+
+t_command		*new_command(t_asm *info);
+void			parse_command(t_asm *info, t_command *cmd, int *i);
+int				get_type(char *s);
+
+int 			array_len(char **array);
+int				character_count(char c, char *s);
+void			trim_arguments(char **array);
 
 void			check_end_of_file(t_asm *info);
 

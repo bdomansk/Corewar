@@ -17,7 +17,8 @@ FLAGS = -Wall -Wextra -Werror
 ASM_SRC = main.c bonuses.c init_info.c put_manual.c check_name_and_comment.c \
 	error.c check_file_name.c get_name_and_comment.c check_end_of_file.c \
 	check_commands_and_labels.c is_contains_label.c find_opcode.c \
-	new_command.c add_labels.c
+	new_command.c add_labels.c parse_command.c array_len.c character_count.c \
+	trim_arguments.c get_type.c
 ASM_OBJ = $(ASM_SRC:.c=.o)
 HEADER = -I ../includes
 DEL = /bin/rm -f

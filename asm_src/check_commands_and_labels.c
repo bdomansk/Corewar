@@ -12,6 +12,21 @@
 
 #include "asm.h"
 
+void		temp_function(t_asm *info)
+{
+	t_command	*start;
+
+	printf("\n________________________________________________\n");
+	start = info->command;
+	while (info->command)
+	{
+		printf("%s, opcode = %d\n", info->command->name, info->command->opcode);
+		info->command = info->command->next;
+	}
+	info->command = start;
+	printf("\n________________________________________________\n");
+}
+
 void		ignore_comment(char *s)
 {
 	int i;
@@ -56,33 +71,8 @@ static void	add_command(t_asm *info, int i)
 	new = new_command(info);
 	if (is_contains_label(info->line, i))
 		add_labels(info, new, &i);
-}
-
-void		temp_function(t_asm *info)
-{
-	t_command	*start;
-	t_label		*begin;
-
-	printf("\n________________________________________________\n");
-	start = info->command;
-	while (info->command)
-	{
-		begin = info->command->label;
-		if (info->command->label)
-		{
-			printf("\n:::::::::::::::::::::::::::::\n");
-			while (info->command->label)
-			{
-				printf("%s\n", info->command->label->name);
-				info->command->label = info->command->label->next;
-			}
-			printf(":::::::::::::::::::::::::::::\n");
-		}
-		info->command->label = begin;
-		info->command = info->command->next;
-	}
-	info->command = start;
-	printf("\n________________________________________________\n");
+	if (info->line && is_contains_command(info->line, i))
+		parse_command(info, new, &i);
 }
 
 void		check_commands_and_labels(t_asm *info)
@@ -105,5 +95,5 @@ void		check_commands_and_labels(t_asm *info)
 		ft_strdel(&info->line);
 	}
 	ft_strdel(&info->line);
-	temp_function(info); // Эту функцию потом нужно удалить
+	//temp_function(info); // Эту функцию потом нужно удалить
 }
