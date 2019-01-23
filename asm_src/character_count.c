@@ -12,14 +12,13 @@
 
 #include "asm.h"
 
-
 int		character_count(char c, char *s)
 {
 	int i;
 	int count;
 
 	i = 0;
-	count = 0; 
+	count = 0;
 	if (s)
 	{
 		while (s[i])

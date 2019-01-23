@@ -17,31 +17,36 @@
 # include <stdio.h> // потом убрать
 # include "op.h"
 
+# define FLAG_STRING	0
+# define FLAG_VALUE		1
+
 typedef struct	s_operations
 {
 	char	*name;
 	int		opcode;
 	int		number_args;
+	int		type_args[3];
+	int		dir_size;
 }				t_operations;
 
 static t_operations g_operations[17] = {
-{"live", 1, 1},
-{"ld", 2, 2},
-{"st", 3, 2},
-{"add", 4, 3},
-{"sub", 5, 3},
-{"and", 6, 3},
-{"or", 7, 3},
-{"xor", 8, 3},
-{"zjmp", 9, 1},
-{"ldi", 10, 3},
-{"sti", 11, 3},
-{"fork", 12, 1},
-{"lld", 13, 2},
-{"lldi", 14, 3},
-{"lfork", 15, 1},
-{"aff", 16, 1},
-{NULL, 0, 0}
+	{"live", 1, 1, {T_DIR, 0, 0}, 4},
+	{"ld", 2, 2, {T_DIR | T_IND, T_REG, 0}, 4},
+	{"st", 3, 2, {T_REG, T_IND | T_REG, 0}, 4},
+	{"add", 4, 3, {T_REG, T_REG, T_REG}, 4},
+	{"sub", 5, 3, {T_REG, T_REG, T_REG}, 4},
+	{"and", 6, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4},
+	{"or", 7, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
+	{"xor", 8, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
+	{"zjmp", 9, 1, {T_DIR, 0, 0}, 2},
+	{"ldi", 10, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
+	{"sti", 11, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2},
+	{"fork", 12, 1, {T_DIR, 0, 0}, 2},
+	{"lld", 13, 2, {T_DIR | T_IND, T_REG, 0}, 4},
+	{"lldi", 14, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
+	{"lfork", 15, 1, {T_DIR, 0, 0}, 2},
+	{"aff", 16, 1, {T_REG, 0, 0}, 4},
+	{NULL, 0, 0, {0, 0, 0}, 0}
 };
 
 typedef struct	s_flags
@@ -56,27 +61,30 @@ typedef struct	s_flags
 	int exists;
 }				t_flags;
 
-typedef struct			s_label
+typedef struct	s_label
 {
 	char				*name;
 	struct s_label		*next;
-}						t_label;
+}				t_label;
 
-typedef struct			s_arg
+typedef struct	s_arg
 {
 	char				*content;
-	struct s_arg		*next;
-}						t_arg;
+	int					value;
+	int					type;
+	int					flag;
+	int					size;
+}				t_arg;
 
-typedef struct			s_command
+typedef struct	s_command
 {
 	char				*name;
 	char				**args;
 	int					opcode;
-	t_label 			*label;
-	t_arg				*arg;
+	t_label				*label;
+	t_arg				arg[3];
 	struct s_command	*next;
-}						t_command;
+}				t_command;
 
 typedef struct	s_asm
 {
@@ -95,8 +103,6 @@ typedef struct	s_asm
 	int				num_line;
 }				t_asm;
 
-
-
 t_asm			*init_info(int argc, char **argv);
 
 void			put_manual(t_asm *info);
@@ -111,16 +117,17 @@ void			get_champion_comment(t_asm *info, int *flag_comment);
 void			check_commands_and_labels(t_asm *info);
 void			ignore_comment(char *s);
 int				is_empty_line(char *s, int *i);
-int 			is_contains_label(char *s, int i);
-int 			is_contains_command(char *s, int i);
+int				is_contains_label(char *s, int i);
+int				is_contains_command(char *s, int i);
 int				find_opcode(char *s, int start);
 void			add_labels(t_asm *info, t_command *new, int *i);
 
 t_command		*new_command(t_asm *info);
 void			parse_command(t_asm *info, t_command *cmd, int *i);
 int				get_type(char *s);
+void			analyze_arguments(t_command *cmd);
 
-int 			array_len(char **array);
+int				array_len(char **array);
 int				character_count(char c, char *s);
 void			trim_arguments(char **array);
 

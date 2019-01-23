@@ -12,21 +12,6 @@
 
 #include "asm.h"
 
-void		temp_function(t_asm *info)
-{
-	t_command	*start;
-
-	printf("\n________________________________________________\n");
-	start = info->command;
-	while (info->command)
-	{
-		printf("%s, opcode = %d\n", info->command->name, info->command->opcode);
-		info->command = info->command->next;
-	}
-	info->command = start;
-	printf("\n________________________________________________\n");
-}
-
 void		ignore_comment(char *s)
 {
 	int i;
@@ -95,5 +80,4 @@ void		check_commands_and_labels(t_asm *info)
 		ft_strdel(&info->line);
 	}
 	ft_strdel(&info->line);
-	//temp_function(info); // Эту функцию потом нужно удалить
 }

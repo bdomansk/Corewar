@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int array_len(char **array)
+int	array_len(char **array)
 {
 	int i;
 
