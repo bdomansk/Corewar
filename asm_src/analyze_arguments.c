@@ -53,8 +53,8 @@ static void	get_arg_value(t_command *cmd, int i)
 static void	get_arg_size(t_command *cmd, int i)
 {
 	if (cmd->arg[i].type == T_REG)
-		cmd->arg[i].size = REG_SIZE;
-	if (cmd->arg[i].type == T_IND)
+		cmd->arg[i].size = 1;
+	else if (cmd->arg[i].type == T_IND)
 		cmd->arg[i].size = IND_SIZE;
 	else
 		cmd->arg[i].size = g_operations[cmd->opcode - 1].dir_size;

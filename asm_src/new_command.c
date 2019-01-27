@@ -22,6 +22,9 @@ t_command	*new_command(t_asm *info)
 		info->command = info->command->next;
 	new = (t_command*)malloc(sizeof(t_command));
 	new->opcode = 0;
+	new->size = 0;
+	new->size_before = 0;
+	new->argument_type_code = 0;
 	new->label = NULL;
 	new->name = NULL;
 	new->next = NULL;

@@ -17,6 +17,8 @@ static void	assembler(t_asm *info)
 	check_name_and_comment(info);
 	check_commands_and_labels(info);
 	check_end_of_file(info);
+	operations_coding(info);
+	analyze_labels(info);
 }
 
 static void	disassembler(t_asm *info)

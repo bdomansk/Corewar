@@ -27,26 +27,27 @@ typedef struct	s_operations
 	int		number_args;
 	int		type_args[3];
 	int		dir_size;
+	int		code_type;
 }				t_operations;
 
 static t_operations g_operations[17] = {
-	{"live", 1, 1, {T_DIR, 0, 0}, 4},
-	{"ld", 2, 2, {T_DIR | T_IND, T_REG, 0}, 4},
-	{"st", 3, 2, {T_REG, T_IND | T_REG, 0}, 4},
-	{"add", 4, 3, {T_REG, T_REG, T_REG}, 4},
-	{"sub", 5, 3, {T_REG, T_REG, T_REG}, 4},
-	{"and", 6, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4},
-	{"or", 7, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
-	{"xor", 8, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4},
-	{"zjmp", 9, 1, {T_DIR, 0, 0}, 2},
-	{"ldi", 10, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
-	{"sti", 11, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2},
-	{"fork", 12, 1, {T_DIR, 0, 0}, 2},
-	{"lld", 13, 2, {T_DIR | T_IND, T_REG, 0}, 4},
-	{"lldi", 14, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2},
-	{"lfork", 15, 1, {T_DIR, 0, 0}, 2},
-	{"aff", 16, 1, {T_REG, 0, 0}, 4},
-	{NULL, 0, 0, {0, 0, 0}, 0}
+	{"live", 1, 1, {T_DIR, 0, 0}, 4, 0},
+	{"ld", 2, 2, {T_DIR | T_IND, T_REG, 0}, 4, 1},
+	{"st", 3, 2, {T_REG, T_IND | T_REG, 0}, 4, 1},
+	{"add", 4, 3, {T_REG, T_REG, T_REG}, 4, 1},
+	{"sub", 5, 3, {T_REG, T_REG, T_REG}, 4, 1},
+	{"and", 6, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"or", 7, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"xor", 8, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"zjmp", 9, 1, {T_DIR, 0, 0}, 2, 0},
+	{"ldi", 10, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
+	{"sti", 11, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2, 1},
+	{"fork", 12, 1, {T_DIR, 0, 0}, 2, 0},
+	{"lld", 13, 2, {T_DIR | T_IND, T_REG, 0}, 4, 1},
+	{"lldi", 14, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
+	{"lfork", 15, 1, {T_DIR, 0, 0}, 2, 0},
+	{"aff", 16, 1, {T_REG, 0, 0}, 4, 1},
+	{NULL, 0, 0, {0, 0, 0}, 0, 0}
 };
 
 typedef struct	s_flags
@@ -83,6 +84,9 @@ typedef struct	s_command
 	int					opcode;
 	t_label				*label;
 	t_arg				arg[3];
+	int					argument_type_code;
+	int					size;
+	int					size_before;
 	struct s_command	*next;
 }				t_command;
 
@@ -132,6 +136,9 @@ int				character_count(char c, char *s);
 void			trim_arguments(char **array);
 
 void			check_end_of_file(t_asm *info);
+
+void			operations_coding(t_asm *info);
+void			analyze_labels(t_asm *info);
 
 void			bonuses(t_asm *info);
 

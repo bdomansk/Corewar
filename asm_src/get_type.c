@@ -22,10 +22,10 @@ static int	is_type_reg(char *s)
 		i = 1;
 		while (s[i] && ft_isdigit(s[i]))
 			i++;
-		if (s[i])
+		if (s[i] || i == 1)
 			return (0);
 		temp = atoi(s + 1);
-		if (temp >= 0 && temp <= REG_NUMBER)
+		if (temp >= 0 && temp <= REG_NUMBER && i <= 3)
 			return (1);
 	}
 	return (0);
@@ -43,11 +43,14 @@ static int	is_type_dir(char *s)
 			while (s[i])
 				if (!ft_strchr(LABEL_CHARS, (int)s[i++]))
 					return (0);
-			return (1);
+			if (i != 2)
+				return (1);
 		}
 		else if (s[1])
 		{
 			i = (s[1] == '-') ? 2 : 1;
+			if (!s[i])
+				return (0);
 			while (s[i] && ft_isdigit(s[i]))
 				i++;
 			if (s[i] == '\0')
@@ -64,6 +67,8 @@ static int	is_type_ind(char *s)
 	if (s[0] && s[0] == LABEL_CHAR)
 	{
 		i = 1;
+		if (!s[i])
+			return (0);
 		while (s[i])
 			if (!ft_strchr(LABEL_CHARS, (int)s[i++]))
 				return (0);
@@ -72,6 +77,8 @@ static int	is_type_ind(char *s)
 	else if (s[0])
 	{
 		i = (s[0] == '-') ? 1 : 0;
+		if (!s[i])
+			return (0);
 		while (s[i] && ft_isdigit(s[i]))
 			i++;
 		if (s[i] == '\0')

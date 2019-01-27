@@ -32,7 +32,7 @@ static char	*trim_arg(char *arg)
 	}
 	s = (char*)malloc(j - i + 1);
 	k = 0;
-	while (arg[i] && arg[i] != ' ' && arg[i] != '\t')
+	while (i <= j)
 		s[k++] = arg[i++];
 	s[k] = '\0';
 	ft_strdel(&arg);
