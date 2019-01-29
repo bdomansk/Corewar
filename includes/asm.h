@@ -104,6 +104,7 @@ typedef struct	s_asm
 	char			*line;
 	char			*last_line;
 	int				fd;
+	int				new_fd;
 	int				num_line;
 }				t_asm;
 
@@ -139,6 +140,7 @@ void			check_end_of_file(t_asm *info);
 
 void			operations_coding(t_asm *info);
 void			analyze_labels(t_asm *info);
+void			print_bytecode(t_asm *info);
 
 void			bonuses(t_asm *info);
 

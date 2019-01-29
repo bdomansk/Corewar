@@ -69,6 +69,7 @@ t_asm			*init_info(int argc, char **argv)
 	ft_memset(info->champion_name, '\0', PROG_NAME_LENGTH + 1);
 	ft_memset(info->champion_comment, '\0', COMMENT_LENGTH + 1);
 	info->prog_size = 0;
+	info->new_fd = 0;
 	info->magic = COREWAR_EXEC_MAGIC;
 	info->file_name = argv[info->flags->exists + 1];
 	info->line = NULL;

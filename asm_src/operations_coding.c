@@ -68,6 +68,8 @@ void		operations_coding(t_asm *info)
 		if (info->command->next)
 			info->command->next->size_before = info->command->size_before +
 		info->command->size;
+		else
+			info->prog_size = info->command->size_before + info->command->size;
 		info->command = info->command->next;
 	}
 	info->command = start;
