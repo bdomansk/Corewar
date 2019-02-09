@@ -19,7 +19,9 @@ ASM_SRC = main.c bonuses.c init_info.c put_manual.c check_name_and_comment.c \
 	check_commands_and_labels.c is_contains_label.c find_opcode.c \
 	new_command.c add_labels.c parse_command.c array_len.c character_count.c \
 	trim_arguments.c get_type.c analyze_arguments.c operations_coding.c \
-	analyze_labels.c print_bytecode.c
+	analyze_labels.c print_bytecode.c reverse.c check_binary_file.c \
+	read_champion_code.c get_arg_by_type.c create_file.c \
+	print_champion_file.c
 ASM_OBJ = $(ASM_SRC:.c=.o)
 HEADER = -I ../includes
 DEL = /bin/rm -f

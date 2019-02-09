@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonuses.c                                          :+:      :+:    :+:   */
+/*   create_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 13:57:18 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/11/08 13:57:21 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/02/09 17:30:26 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/02/09 17:30:29 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	bonuses(t_asm *info)
+void			create_file(t_asm *info)
 {
-	if (info->flags->c)
-		ft_printf("%s", GREEN);
-	ft_printf("Writing output program to %s\n", info->new_file_name);
-	if (info->flags->c)
-		ft_printf("%s", DEF);
-	if (info->flags->l)
-		system("leaks asm");
-	if (info->flags->m)
-		system("afplay music/Winning.mp3&");
+	char *error;
+	char *s;
+
+	info->new_fd = open(info->new_file_name, O_RDWR | O_TRUNC | O_CREAT, 0777);
+	if (info->new_fd == -1)
+	{
+		s = "Can't create file with name : ";
+		error = ft_strjoin(s, info->new_file_name);
+		error_reason(info, error);
+	}
 }

@@ -14,7 +14,6 @@
 # define ASM_H
 # include "../libft/libft.h"
 # include <fcntl.h>
-# include <stdio.h> // потом убрать
 # include "op.h"
 
 # define FLAG_STRING	0
@@ -141,6 +140,13 @@ void			check_end_of_file(t_asm *info);
 void			operations_coding(t_asm *info);
 void			analyze_labels(t_asm *info);
 void			print_bytecode(t_asm *info);
+unsigned int	reverse(unsigned int value, int size);
+
+void			check_binary_file(t_asm *info);
+void			read_champion_code(t_asm *info);
+void			get_arg_by_type(t_asm *info, t_command *cmd, int i, int type);
+void			create_file(t_asm *info);
+void			print_champion_file(t_asm *info);
 
 void			bonuses(t_asm *info);
 

@@ -19,12 +19,17 @@ static void	assembler(t_asm *info)
 	check_end_of_file(info);
 	operations_coding(info);
 	analyze_labels(info);
+	create_file(info);
 	print_bytecode(info);
 }
 
 static void	disassembler(t_asm *info)
 {
 	ft_printf("disassembler for %s\n", info->file_name);
+	check_binary_file(info);
+	read_champion_code(info);
+	create_file(info);
+	print_champion_file(info);
 }
 
 int			main(int argc, char **argv)
