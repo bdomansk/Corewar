@@ -19,7 +19,7 @@ void	put_manual(t_asm *info)
 		error(info);
 	if (info->flags->c)
 		ft_printf("%s", AQUAMARINE);
-	ft_printf("usage:	./asm [-helcdm] champion[.s or .cor]\n\
+	ft_printf("usage:	./asm [-hmlcind] champion[.s or .cor]\n\
 	-h see the usage\n\
 	-m turn on musical accompaniment\n\
 	-l show leaks\n\
