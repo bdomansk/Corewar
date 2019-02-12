@@ -57,4 +57,34 @@ typedef char					t_arg_type;
 # define COMMENT_LENGTH			2048
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
+typedef struct	s_operations
+{
+	char	*name;
+	int		opcode;
+	int		number_args;
+	int		type_args[3];
+	int		dir_size;
+	int		code_type;
+}				t_operations;
+
+static t_operations g_operations[17] = {
+	{"live", 1, 1, {T_DIR, 0, 0}, 4, 0},
+	{"ld", 2, 2, {T_DIR | T_IND, T_REG, 0}, 4, 1},
+	{"st", 3, 2, {T_REG, T_IND | T_REG, 0}, 4, 1},
+	{"add", 4, 3, {T_REG, T_REG, T_REG}, 4, 1},
+	{"sub", 5, 3, {T_REG, T_REG, T_REG}, 4, 1},
+	{"and", 6, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"or", 7, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"xor", 8, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1},
+	{"zjmp", 9, 1, {T_DIR, 0, 0}, 2, 0},
+	{"ldi", 10, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
+	{"sti", 11, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2, 1},
+	{"fork", 12, 1, {T_DIR, 0, 0}, 2, 0},
+	{"lld", 13, 2, {T_DIR | T_IND, T_REG, 0}, 4, 1},
+	{"lldi", 14, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1},
+	{"lfork", 15, 1, {T_DIR, 0, 0}, 2, 0},
+	{"aff", 16, 1, {T_REG, 0, 0}, 4, 1},
+	{NULL, 0, 0, {0, 0, 0}, 0, 0}
+};
+
 #endif
