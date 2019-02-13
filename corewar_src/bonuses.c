@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonuses.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/02/12 12:17:57 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/02/12 12:17:59 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			main(int argc, char **argv)
+void	bonuses(t_vm *info)
 {
-	t_vm	*info;
-
-	info = init_info(argc, argv);
-	parse_arguments(info);
-	bonuses(info);
-	return (0);
+	if (info->flags->c)
+		ft_printf("%s", GREEN);
+	ft_printf("Contestant n, %s, has won!\n", "champ_name");
+	if (info->flags->c)
+		ft_printf("%s", DEF);
+	if (info->flags->l)
+		system("leaks corewar");
+	if (info->flags->m)
+		system("afplay music/Winning.mp3&");
 }

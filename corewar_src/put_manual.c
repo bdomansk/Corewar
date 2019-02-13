@@ -14,17 +14,21 @@
 
 void	put_manual(t_vm *info)
 {
+	char	*line;
+	int		fd;
+
 	info->flags->h = 1;
 	if (info->error_reason)
 		error(info);
 	if (info->flags->c)
 		ft_printf("%s", AQUAMARINE);
-	ft_printf("usage:	./coreawar [-helcdm] champ1.cor champ2.cor ...\n\
-	-h see the usage\n\
-	-m turn on musical accompaniment\n\
-	-l show leaks\n\
-	-c enable colors\n\
-	-v enable visualization\n");
+	line = NULL;
+	fd = open("manual_corewar", O_RDONLY);
+	while (get_next_line(fd, &line) == 1)
+	{
+		ft_putendl(line);
+		free(line);
+	}
 	if (info->flags->c)
 		ft_printf("%s", DEF);
 	if (info->flags->l)

@@ -24,13 +24,20 @@ typedef struct	s_flags
 	int	c;
 	int v;
 	int	m;
-	int exists;
+	int	s;
+	int	dump;
+	int	dump_value;
 }				t_flags;
 
 typedef struct	s_vm
 {
 	t_flags			*flags;
-	unsigned int	prog_size;
+	int				argc;
+	int				i;
+	int				number_of_bots;
+	int 			detalization_level;
+	int				available_id[5];
+	char			**argv;
 	char			*error_reason;
 }				t_vm;
 
@@ -40,6 +47,9 @@ void			error(t_vm *info);
 void			error_reason(t_vm *info, char *reason);
 void			bonuses(t_vm *info);
 
+void			parse_arguments(t_vm *info);
+int				is_natural(char *s);
+void			check_bot(t_vm *info, int *i);
 
 
 #endif

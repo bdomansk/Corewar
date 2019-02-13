@@ -14,7 +14,8 @@ NAME = ../corewar
 LIB = ../libft/libft.a
 LIBDIR = ../libft
 FLAGS = -Wall -Wextra -Werror
-COREWAR_SRC = main.c init_info.c put_manual.c error.c
+COREWAR_SRC = main.c init_info.c put_manual.c error.c parse_arguments.c \
+		bonuses.c is_natural.c check_bot.c 
 COREWAR_OBJ = $(COREWAR_SRC:.c=.o)
 HEADER = -I ../includes
 DEL = /bin/rm -f

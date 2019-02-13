@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_natural.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/02/13 15:05:30 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/02/13 15:05:32 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			main(int argc, char **argv)
+int		is_natural(char *s)
 {
-	t_vm	*info;
+	int	i;
 
-	info = init_info(argc, argv);
-	parse_arguments(info);
-	bonuses(info);
-	return (0);
+	if (!s)
+		return (0);
+	i = (s[0] == '+') ? 1 : 0;
+	while (s[i])
+	{
+		if (s[i] <= '0' || s[i] >= '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
