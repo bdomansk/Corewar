@@ -29,11 +29,20 @@ typedef struct	s_flags
 	int	dump_value;
 }				t_flags;
 
+typedef struct	s_bot
+{
+	int				id;
+	unsigned int	prog_size;
+	char			name[PROG_NAME_LENGTH + 1];
+	char			comment[COMMENT_LENGTH + 1];
+}		t_bot;
+
 typedef struct	s_vm
 {
 	t_flags			*flags;
+	t_bot			bot[4];
 	int				argc;
-	int				i;
+	int				fd;
 	int				number_of_bots;
 	int 			detalization_level;
 	int				available_id[5];
@@ -50,6 +59,6 @@ void			bonuses(t_vm *info);
 void			parse_arguments(t_vm *info);
 int				is_natural(char *s);
 void			check_bot(t_vm *info, int *i);
-
+unsigned int	reverse(unsigned int value, int size);
 
 #endif

@@ -12,10 +12,54 @@
 
 #include "corewar.h"
 
-void	check_bot(t_vm *info, int *i)
+static void	check_binary_file(t_vm *info)
 {
+	unsigned int	magic;
+	char			temp_null[4];
+	int				i;
+
+	i = info->number_of_bots;
+	if (!read(info->fd, &magic, 4))
+		error_reason(info, "Magic header is missing");
+	if (reverse(magic, 4) != COREWAR_EXEC_MAGIC)
+		error_reason(info, "Wrong magic header");
+	if (!read(info->fd, info->bot[i].name, PROG_NAME_LENGTH))
+		error_reason(info, "Сhampion name is missing");
+	if (!read(info->fd, temp_null, 4))
+		error_reason(info, "Null after champion name is missing");
+	if (!read(info->fd, &info->bot[i].prog_size, 4))
+		error_reason(info, "Champion code size is missing");
+	if (!read(info->fd, info->bot[i].comment, COMMENT_LENGTH))
+		error_reason(info, "Champion comment is missing");
+	if (!read(info->fd, temp_null, 4))
+		error_reason(info, "Null after champion comment is missing");
+	info->bot[i].prog_size= reverse(info->bot[i].prog_size, 4);
+}
+
+static void	check_file_name(t_vm *info, int *i)
+{
+	char	*extension;
+	int		fd;
+
+	extension = ft_strrchr(info->argv[*i], '.');
+	fd = open(info->argv[*i], O_RDONLY);
+	if (fd < 0)
+		info->error_reason = "Cant open this file";
+	else if (!extension)
+		info->error_reason = "Name of the file without any extension";
+	else if (ft_strcmp(extension, ".cor"))
+		info->error_reason = "Extension of file must be .cor";
+	else if (read(fd, NULL, 0) == -1)
+		info->error_reason = "Cant read this file";
 	if (info->error_reason)
-		put_manual(info);//просто для проверки, на самом деле не нужно
-	//нужно проверить имя и сам файл
+		put_manual(info);
+	info->fd = fd;
+}
+
+void		check_bot(t_vm *info, int *i)
+{
+	check_file_name(info, i);
+	check_binary_file(info);
+	info->number_of_bots++;
 	(*i)++;
 }

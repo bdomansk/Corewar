@@ -50,8 +50,10 @@ t_vm			*init_info(int argc, char **argv)
 	info->number_of_bots = 0;
 	info->error_reason = NULL;
 	info->detalization_level = 0;
-	info->i = 0;
+	info->fd = 0;
 	info->argc = argc;
 	info->argv = argv;
+	if (argc == 1)
+		put_manual(info);
 	return (info);
 }

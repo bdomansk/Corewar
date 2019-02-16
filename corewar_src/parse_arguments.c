@@ -22,6 +22,7 @@ static void	get_cycles_value(t_vm *info, int *i)
 	}
 	info->flags->dump = 1;
 	info->flags->dump_value = ft_atoi(info->argv[*i]);
+	(*i)++;
 }
 
 static void	get_detalization_level(t_vm *info, int *i)
@@ -35,6 +36,7 @@ static void	get_detalization_level(t_vm *info, int *i)
 		put_manual(info);
 	info->flags->s = 1;
 	info->detalization_level = ft_atoi(info->argv[*i]);
+	(*i)++;
 }
 
 static void	get_bot_id(t_vm *info, int *i)
@@ -58,10 +60,12 @@ static void	get_bot_id(t_vm *info, int *i)
 	if (info->error_reason)
 		put_manual(info);
 	info->available_id[id] = 1;
-	//  После этого нужно проверить чемпиона , и если все ок добаить его и присвоить ему айди.
+	(*i)++;
+	check_bot(info, i);
+	printf("new id %d", id);//Если с ботом все ок, то присвоить ему id
 }
 
-static void		get_flags(t_vm *info, int *num)
+static void	get_flags(t_vm *info, int *num)
 {
 	int		i;
 	char	*s;
@@ -84,10 +88,12 @@ static void		get_flags(t_vm *info, int *num)
 		info->flags->m = (s[i] == 'm') ? 1 : info->flags->m;
 		i++;
 	}
+	if (info->flags->h)
+		put_manual(info);
 	(*num)++;
 }
 
-void	parse_arguments(t_vm *info)
+void		parse_arguments(t_vm *info)
 {
 	int	i;
 
@@ -102,8 +108,13 @@ void	parse_arguments(t_vm *info)
 			get_bot_id(info, &i);
 		else if (info->argv[i][0] == '-')
 			get_flags(info, &i);
-		else 
+		else
 			check_bot(info, &i);
 	}
-	// После этотго нужно проверить количество игроков и было ли вообще что-то
+	if (info->number_of_bots > MAX_PLAYERS)
+		info->error_reason = "Too many bots. Maximum allowed only four";
+	if (!info->number_of_bots)
+		info->error_reason = "No champion indicated";
+	if (info->error_reason)
+		put_manual(info);
 }
