@@ -33,6 +33,7 @@ typedef struct	s_bot
 {
 	int				id;
 	unsigned int	prog_size;
+	unsigned char	*exec_code;
 	char			name[PROG_NAME_LENGTH + 1];
 	char			comment[COMMENT_LENGTH + 1];
 }		t_bot;

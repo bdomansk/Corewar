@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   define_bots_id.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/30 17:47:52 by bdomansk          #+#    #+#             */
-/*   Updated: 2018/10/30 17:47:54 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/02/17 17:50:02 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/02/17 17:50:03 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			main(int argc, char **argv)
+void	define_bots_id(t_vm *info)
 {
-	t_vm	*info;
+	int i;
+	int j;
 
-	info = init_info(argc, argv);
-	parse_arguments(info);
-	define_bots_id(info);
-	bonuses(info);
-	return (0);
+	i = 0;
+	while (i < info->number_of_bots)
+	{
+		if (info->bot[i].id == 0)
+		{
+			j = 1;
+			while (info->available_id[j])
+				j++;
+			info->available_id[j] = 1;
+			info->bot[i].id = j;
+		}
+		i++;
+	}
 }

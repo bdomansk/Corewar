@@ -49,7 +49,7 @@ static void	get_bot_id(t_vm *info, int *i)
 		info->error_reason = "Wrong id of a bot after the flag -n";
 	if (*i + 1 >= info->argc)
 		info->error_reason = "No champ.cor after the flag -n N";
-	else 
+	else
 	{
 		id = ft_atoi(info->argv[*i]);
 		if (id < 1 || id > 4)
@@ -62,7 +62,7 @@ static void	get_bot_id(t_vm *info, int *i)
 	info->available_id[id] = 1;
 	(*i)++;
 	check_bot(info, i);
-	printf("new id %d", id);//Если с ботом все ок, то присвоить ему id
+	info->bot[info->number_of_bots - 1].id = id;
 }
 
 static void	get_flags(t_vm *info, int *num)
@@ -106,15 +106,14 @@ void		parse_arguments(t_vm *info)
 			get_detalization_level(info, &i);
 		else if (!ft_strcmp(info->argv[i], "-n"))
 			get_bot_id(info, &i);
-		else if (info->argv[i][0] == '-')
+		else if (info->argv[i][0] == '-' && info->argv[i][1])
 			get_flags(info, &i);
 		else
 			check_bot(info, &i);
 	}
-	if (info->number_of_bots > MAX_PLAYERS)
-		info->error_reason = "Too many bots. Maximum allowed only four";
 	if (!info->number_of_bots)
+	{
 		info->error_reason = "No champion indicated";
-	if (info->error_reason)
 		put_manual(info);
+	}
 }
