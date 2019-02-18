@@ -12,6 +12,29 @@
 
 #include "corewar.h"
 
+void		temp_function(t_vm *info)
+{
+	int i;
+	int k;
+
+	i = -1;
+	k = 0;
+	while (++i < MEM_SIZE)
+	{
+		if (info->map[i].color != 10)
+			printf("\033[92m%0.2x\033[0m ", info->map[i].cell);
+		else
+			printf("\033[90m00\033[0m ");
+		k++;
+		if (k == 64)
+		{
+			k = 0;
+			printf("\n");
+		}
+	}
+	printf("\n");
+}
+
 int			main(int argc, char **argv)
 {
 	t_vm	*info;
@@ -19,6 +42,9 @@ int			main(int argc, char **argv)
 	info = init_info(argc, argv);
 	parse_arguments(info);
 	define_bots_id(info);
+	//Тут нужно посортировать ботов по айди (от 1 до 4)
+	fill_map(info);
+	temp_function(info);
 	bonuses(info);
 	return (0);
 }

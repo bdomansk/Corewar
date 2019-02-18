@@ -36,16 +36,23 @@ typedef struct	s_bot
 	unsigned char	*exec_code;
 	char			name[PROG_NAME_LENGTH + 1];
 	char			comment[COMMENT_LENGTH + 1];
-}		t_bot;
+}				t_bot;
+
+typedef struct	s_map
+{
+	unsigned char	cell;
+	int				color;
+}				t_map;
 
 typedef struct	s_vm
 {
 	t_flags			*flags;
 	t_bot			bot[4];
+	t_map			map[MEM_SIZE];
 	int				argc;
 	int				fd;
 	int				number_of_bots;
-	int 			detalization_level;
+	int				detalization_level;
 	int				available_id[5];
 	char			**argv;
 	char			*error_reason;
@@ -61,5 +68,8 @@ void			parse_arguments(t_vm *info);
 int				is_natural(char *s);
 void			check_bot(t_vm *info, int *i);
 unsigned int	reverse(unsigned int value, int size);
+
+void			define_bots_id(t_vm *info);
+void			fill_map(t_vm *info);
 
 #endif
