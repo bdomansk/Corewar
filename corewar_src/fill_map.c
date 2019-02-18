@@ -34,25 +34,19 @@ void		fill_map(t_vm *info)
 {
 	int i;
 	int	num_recorded_bots;
-	int border;
 
 	i = 0;
 	num_recorded_bots = 0;
 	while (i < MEM_SIZE)
 	{
-		border = num_recorded_bots * MEM_SIZE / info->number_of_bots;
-		if (i == border)
+		if (i == num_recorded_bots * MEM_SIZE / info->number_of_bots)
 		{
 		//new_carriage(carriage, i * MEM_SIZE / bots, i, -1); Нужно добавить новый процесс (каретку)
 			put_bot(info, num_recorded_bots, &i);
 			num_recorded_bots++;
 		}
-		else
-			while (i < MEM_SIZE && i != border)
-			{
-				info->map[i].cell = 0;
-				info->map[i].color = 10;
-				i++;
-			}
+		info->map[i].cell = 0;
+		info->map[i].color = 10;
+		i++;
 	}
 }
