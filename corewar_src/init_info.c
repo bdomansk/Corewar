@@ -23,6 +23,7 @@ static t_flags	*init_flags(void)
 	flags->v = 0;
 	flags->m = 0;
 	flags->s = 0;
+	flags->n = 0;
 	flags->dump = 0;
 	flags->dump_value = 0;
 	return (flags);

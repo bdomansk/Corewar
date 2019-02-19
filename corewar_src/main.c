@@ -42,7 +42,6 @@ int			main(int argc, char **argv)
 	info = init_info(argc, argv);
 	parse_arguments(info);
 	define_bots_id(info);
-	//Тут нужно посортировать ботов по айди (от 1 до 4)
 	fill_map(info);
 	temp_function(info);
 	bonuses(info);

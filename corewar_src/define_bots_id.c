@@ -12,7 +12,35 @@
 
 #include "corewar.h"
 
-void	define_bots_id(t_vm *info)
+static void	swap_bots(t_vm *info, int num)
+{
+	t_bot temp_bot;
+
+	temp_bot = info->bot[num];
+	info->bot[num] = info->bot[num + 1];
+	info->bot[num + 1] = temp_bot;
+}
+
+static void	sort_bots_by_id(t_vm *info)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i + 1 < info->number_of_bots)
+	{
+		j = 0;
+		while (j + 1 < info->number_of_bots)
+		{
+			if (info->bot[j].id > info->bot[j + 1].id)
+				swap_bots(info, j);
+			j++;
+		}
+		i++;
+	}
+}
+
+void		define_bots_id(t_vm *info)
 {
 	int i;
 	int j;
@@ -30,4 +58,6 @@ void	define_bots_id(t_vm *info)
 		}
 		i++;
 	}
+	if (info->flags->n)
+		sort_bots_by_id(info);
 }

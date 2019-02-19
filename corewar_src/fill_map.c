@@ -41,7 +41,7 @@ void		fill_map(t_vm *info)
 	{
 		if (i == num_recorded_bots * MEM_SIZE / info->number_of_bots)
 		{
-		//new_carriage(carriage, i * MEM_SIZE / bots, i, -1); Нужно добавить новый процесс (каретку)
+			new_carriage(info, info->bot[num_recorded_bots], i);
 			put_bot(info, num_recorded_bots, &i);
 			num_recorded_bots++;
 		}

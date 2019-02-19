@@ -16,7 +16,7 @@ LIBDIR = ../libft
 FLAGS = -Wall -Wextra -Werror
 COREWAR_SRC = main.c init_info.c put_manual.c error.c parse_arguments.c \
 		bonuses.c is_natural.c check_bot.c reverse.c define_bots_id.c \
-		fill_map.c
+		fill_map.c new_carriage.c 
 COREWAR_OBJ = $(COREWAR_SRC:.c=.o)
 HEADER = -I ../includes
 DEL = /bin/rm -f

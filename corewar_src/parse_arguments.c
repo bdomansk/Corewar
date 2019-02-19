@@ -63,6 +63,7 @@ static void	get_bot_id(t_vm *info, int *i)
 	(*i)++;
 	check_bot(info, i);
 	info->bot[info->number_of_bots - 1].id = id;
+	info->flags->n = 1;
 }
 
 static void	get_flags(t_vm *info, int *num)
