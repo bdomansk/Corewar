@@ -13,6 +13,9 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "../libft/libft.h"
+# include "SDL.h"
+# include "SDL_mixer.h"
+# include <ncurses.h>
 # include <fcntl.h>
 # include "op.h"
 # include <stdio.h> //потом убрать
@@ -47,9 +50,10 @@ typedef struct	s_map
 
 typedef struct	s_carriage
 {
-	int					position;
+	int					id;
 	int					carry;
-	int					alive;		
+	int					alive;
+	int					position;
 	int					exec_command;
 	int					number_cycle;
 	t_bot				parent;
@@ -59,13 +63,19 @@ typedef struct	s_carriage
 
 typedef struct	s_vm
 {
+	WINDOW			*w;
+	WINDOW			*info;
 	t_flags			*flags;
 	t_bot			bot[4];
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
 	int				argc;
 	int				fd;
+	int				delay;
+	int				cycles;
+	int				running;
 	int				number_of_bots;
+	int				num_of_carriages;
 	int				detalization_level;
 	int				available_id[5];
 	char			**argv;
@@ -86,5 +96,7 @@ unsigned int	reverse(unsigned int value, int size);
 void			define_bots_id(t_vm *info);
 void			fill_map(t_vm *info);
 void			new_carriage(t_vm *info, t_bot parent, int position);
+
+void			visualization_init(t_vm *vm);
 
 #endif

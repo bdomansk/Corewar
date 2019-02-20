@@ -49,6 +49,7 @@ t_vm			*init_info(int argc, char **argv)
 	info->flags = init_flags();
 	init_available_ids(info);
 	info->number_of_bots = 0;
+	info->num_of_carriages = 0;
 	info->error_reason = NULL;
 	info->detalization_level = 0;
 	info->fd = 0;

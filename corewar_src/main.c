@@ -12,6 +12,10 @@
 
 #include "corewar.h"
 
+/*
+** while (42) == while (cycle_to_die > 0)
+*/
+
 void		temp_function(t_vm *info)
 {
 	int i;
@@ -35,15 +39,40 @@ void		temp_function(t_vm *info)
 	printf("\n");
 }
 
+void		standart_output(t_vm *info)
+{
+	printf("standart output %s\n", info->bot[0].name);
+}
+
+void		visulization(t_vm *vm)
+{
+	visualization_init(vm);
+	while (42) 
+	{
+		//check_key(getch(), 1);
+		werase(vm->w);
+		werase(vm->info);
+		//print_map(carriage);
+		//print_info_table();
+		wrefresh(vm->w);
+		wrefresh(vm->info);
+		usleep(vm->delay / vm->cycles);
+	}
+	delwin(vm->w);
+	delwin(vm->info);
+	endwin();
+}
+
 int			main(int argc, char **argv)
 {
-	t_vm	*info;
+	t_vm	*vm;
 
-	info = init_info(argc, argv);
-	parse_arguments(info);
-	define_bots_id(info);
-	fill_map(info);
-	temp_function(info);
-	bonuses(info);
+	vm = init_info(argc, argv);
+	parse_arguments(vm);
+	define_bots_id(vm);
+	fill_map(vm);
+	(vm->flags->v) ? visulization(vm) : standart_output(vm);
+	//temp_function(vm);
+	bonuses(vm);
 	return (0);
 }
