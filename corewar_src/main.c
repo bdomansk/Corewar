@@ -52,7 +52,7 @@ void		visulization(t_vm *vm)
 		//check_key(getch(), 1);
 		werase(vm->w);
 		werase(vm->info);
-		//print_map(carriage);
+		draw_map(vm);
 		//print_info_table();
 		wrefresh(vm->w);
 		wrefresh(vm->info);
@@ -72,7 +72,7 @@ int			main(int argc, char **argv)
 	define_bots_id(vm);
 	fill_map(vm);
 	(vm->flags->v) ? visulization(vm) : standart_output(vm);
-	//temp_function(vm);
+	temp_function(vm);
 	bonuses(vm);
 	return (0);
 }
