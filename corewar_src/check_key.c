@@ -26,7 +26,7 @@ int		check_key(int ch, t_vm *vm)
 	if (ch == 'y')
 		vm->cycles = ((cycles - 100) < 1) ? 1 : cycles - 100;
 	if (ch == 't')
-		vm->cycles = ((cycles - 10) < 1) ? 1 : cycles - 10;;
+		vm->cycles = ((cycles - 10) < 1) ? 1 : cycles - 10;
 	if (ch == 'r')
 		vm->cycles = ((cycles - 1) < 1) ? 1 : cycles - 1;
 	if (ch == 'd')

@@ -12,11 +12,67 @@
 
 #include "corewar.h"
 
-void	draw_info_table(t_vm *vm)
+/*
+** в draw_info, draw_bots данные будут меняться
+*/
+
+static void	draw_bots(t_vm *vm)
 {
-	//draw_info(vm);
-	//draw_bots();
-	//draw_duck();
+	int i;
+
+	i = 0;
+	while (i < vm->number_of_bots)
+	{
+		wattron(vm->info, COLOR_PAIR(vm->bot[i].id));
+		mvwprintw(vm->info, 5 + (i * 6), 3, "Champ : %s\n", vm->bot[i].name);
+		wattroff(vm->info, COLOR_PAIR(vm->bot[i].id));
+		mvwprintw(vm->info, 5 + (i * 6) + 1, 5, "Lives\t\t%d\n", 0);
+		mvwprintw(vm->info, 5 + (i * 6) + 2, 5, "Something else\t%d\n", 0);
+		i++;
+	}
+}
+
+static void	draw_duck(t_vm *vm)
+{
+	mvwprintw(vm->info, 62, 1, "      _\n");
+	mvwprintw(vm->info, 63, 1, "  .__(.)< (MAY THE FORCE BE WHITH YOU)\n");
+	mvwprintw(vm->info, 64, 1, "  \\___)   \n");
+}
+
+static void	draw_run(t_vm *vm)
+{
+	if (vm->running)
+	{
+		wattron(vm->info, COLOR_PAIR(2));
+		mvwprintw(vm->info, 1, 3, "RUNING\n");
+		if (vm->flags->m == 1)
+			mvwprintw(vm->info, 1, 30, "MUSIC: Play\n");
+		wattroff(vm->info, COLOR_PAIR(2));
+		if (vm->flags->m == 0)
+			mvwprintw(vm->info, 1, 30, "MUSIC: OFF\n");
+	}
+}
+
+static void	draw_info(t_vm *vm)
+{
+	int n;
+
+	n = 5 + (vm->number_of_bots * 6) + 2;
+	draw_run(vm);
+	mvwprintw(vm->info, 3, 3, "Cycles/second : %d\n", vm->cycles);
+	mvwprintw(vm->info, 58, 3, "Q : +100\tW : +10\t\tE : +1\n");
+	mvwprintw(vm->info, 59, 3, "R : -1\tT : -10\t\tY : -100\n");
+	mvwprintw(vm->info, n, 3, "CYCLE_TO_DIE\t\t%d\n", CYCLE_TO_DIE);
+	mvwprintw(vm->info, n + 2, 3, "CYCLE_DELTA\t\t%d\n", CYCLE_DELTA);
+	mvwprintw(vm->info, n + 4, 3, "NBR_LIVE\t\t%d\n", NBR_LIVE);
+	mvwprintw(vm->info, n + 6, 3, "MAX_CHECKS\t\t%d\n", MAX_CHECKS);
+}
+
+void		draw_info_table(t_vm *vm)
+{
+	draw_info(vm);
+	draw_bots(vm);
+	draw_duck(vm);
 	wattron(vm->w, COLOR_PAIR(10));
 	wattron(vm->info, COLOR_PAIR(10));
 	box(vm->w, 0, 0);

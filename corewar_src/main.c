@@ -47,7 +47,7 @@ void		standart_output(t_vm *info)
 void		visulization(t_vm *vm)
 {
 	visualization_init(vm);
-	while (42) 
+	while (42)
 	{
 		check_key(getch(), vm);
 		werase(vm->w);
