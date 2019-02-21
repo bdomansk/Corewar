@@ -24,7 +24,7 @@ static void	put_bot(t_vm *info, int num_recorded_bots, int *i)
 	while (temp > 0)
 	{
 		info->map[*i].cell = exec_code[size - temp];
-		info->map[*i].color = info->bot[*i].id;
+		info->map[*i].color = info->bot[num_recorded_bots].id;
 		(*i)++;
 		temp--;
 	}

@@ -49,11 +49,11 @@ void		visulization(t_vm *vm)
 	visualization_init(vm);
 	while (42) 
 	{
-		//check_key(getch(), 1);
+		check_key(getch(), vm);
 		werase(vm->w);
 		werase(vm->info);
 		draw_map(vm);
-		//print_info_table();
+		draw_info_table(vm);
 		wrefresh(vm->w);
 		wrefresh(vm->info);
 		usleep(vm->delay / vm->cycles);

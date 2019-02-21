@@ -69,6 +69,8 @@ typedef struct	s_vm
 	t_bot			bot[4];
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
+	int				x;
+	int				y;
 	int				argc;
 	int				fd;
 	int				delay;
@@ -98,5 +100,8 @@ void			fill_map(t_vm *info);
 void			new_carriage(t_vm *info, t_bot parent, int position);
 
 void			visualization_init(t_vm *vm);
+int				check_key(int ch, t_vm *vm);
+void			draw_map(t_vm *vm);
+void			draw_info_table(t_vm *vm);
 
 #endif
