@@ -15,29 +15,32 @@ LIB = ../libft/libft.a
 LIBDIR = ../libft
 FLAGS = -Wall -Wextra -Werror 
 COREWAR_SRC = main.c init_info.c put_manual.c error.c parse_arguments.c \
-		bonuses.c is_natural.c check_bot.c reverse.c define_bots_id.c \
-		fill_map.c new_carriage.c visualization_init.c  check_key.c \
-		draw_map.c draw_info_table.c npause.c sdl_mixer_init.c 
+	bonuses.c is_natural.c check_bot.c reverse.c define_bots_id.c fill_map.c \
+	new_carriage.c visualization_init.c check_key.c draw_map.c \
+	draw_info_table.c npause.c introducing_contestants.c sdl_mixer_init.c 
 COREWAR_OBJ = $(COREWAR_SRC:.c=.o)
+COREWAR_HEADER = ../includes/corewar.h ../includes/op.h
 HEADER = -I ../includes
 HEADER += -I ../frameworks/SDL2.framework/Headers/
 HEADER += -I ../frameworks/SDL2_mixer.framework/Headers/ -F ../frameworks
 FRAMEWORKS = -framework SDL2
 FRAMEWORKS += -F  ../frameworks
 FRAMEWORKS += -framework SDL2_mixer 
+FRAMEWORKS += -rpath frameworks
 DEL = /bin/rm -f
 
-.PHONY : all clean n fclean re
+.PHONY : all clean n fclean re 
 
 all : $(NAME)
 
-$(NAME) : $(LIB) $(COREWAR_OBJ) 
+$(NAME) : $(COREWAR_OBJ) $(LIB) 
 	@echo "Compiling corewar"
-	@gcc $(FLAGS) $(COREWAR_OBJ) -o $(NAME) -lncurses $(LIB) $(FRAMEWORKS) -rpath frameworks
+	@gcc $(FLAGS) $(COREWAR_OBJ) -o $(NAME) -lncurses $(LIB) $(FRAMEWORKS)
 
-$(COREWAR_OBJ): $(COREWAR_SRC)
+$(COREWAR_OBJ): $(COREWAR_SRC) $(COREWAR_HEADER)
 	@echo "Corewar objects creating"
-	@gcc $(FLAGS) -c $(COREWAR_SRC) $(HEADER) 
+	@gcc $(FLAGS) -c $(COREWAR_SRC) $(HEADER)
+
 
 $(LIB) :
 	@make -C $(LIBDIR)

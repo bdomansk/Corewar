@@ -110,4 +110,6 @@ void			draw_info_table(t_vm *vm);
 void			sdl_mixer_init(t_vm *vm);
 void			npause(t_vm *vm);
 
+void			introducing_contestants(t_vm *vm);
+
 #endif

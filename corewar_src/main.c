@@ -39,9 +39,10 @@ void		temp_function(t_vm *info)
 	printf("\n");
 }
 
-void		standart_output(t_vm *info)
+void		standart_output(t_vm *vm)
 {
-	printf("standart output %s\n", info->bot[0].name);
+	printf("standart output %s\n", vm->bot[0].name);
+	introducing_contestants(vm);
 }
 
 void		visulization(t_vm *vm)

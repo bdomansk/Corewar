@@ -20,23 +20,20 @@ INCLUDES = includes/
 FLAGS = -Wall -Wextra -Werror
 DEL = /bin/rm -f
 
-.PHONY : all clean n fclean re
+.PHONY : all clean n fclean re vm asm
 
-all : $(ASM) $(COREWAR)
+all : asm vm
 
-$(ASM) : $(LIB)
+asm : 
 	@make -C $(ASMDIR)
 
-$(COREWAR) : $(LIB)
+vm :
 	@make -C $(COREWARDIR)
 
 clean:
 	@make -C $(ASMDIR)/ clean
 	@make -C $(COREWARDIR)/ clean
 	@make -C $(LIBDIR)/ clean
-
-$(LIB) :
-	@make -C $(LIBDIR)
 
 n :
 	@norminette $(INCLUDES)

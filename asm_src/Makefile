@@ -23,6 +23,7 @@ ASM_SRC = main.c bonuses.c init_info.c put_manual.c check_name_and_comment.c \
 	read_champion_code.c get_arg_by_type.c create_file.c \
 	print_champion_file.c
 ASM_OBJ = $(ASM_SRC:.c=.o)
+ASM_HEADER = ../includes/asm.h ../includes/op.h
 HEADER = -I ../includes
 DEL = /bin/rm -f
 
@@ -34,7 +35,7 @@ $(NAME) : $(LIB) $(ASM_OBJ)
 	@echo "Compiling asm"
 	@gcc $(FLAGS) $(ASM_OBJ) -o $(NAME) $(LIB)
 
-$(ASM_OBJ): $(ASM_SRC)
+$(ASM_OBJ): $(ASM_SRC) $(ASM_HEADER)
 	@echo "Asm objects creating"
 	@gcc $(FLAGS) -c $(ASM_SRC) $(HEADER)
 
