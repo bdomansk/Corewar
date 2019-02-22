@@ -20,6 +20,8 @@
 # include "op.h"
 # include <stdio.h> //потом убрать
 
+# define MUS_PATH "music/starwars.mp3"
+
 typedef struct	s_flags
 {
 	int	h;
@@ -57,7 +59,7 @@ typedef struct	s_carriage
 	int					exec_command;
 	int					number_cycle;
 	t_bot				parent;
-	unsigned int		register_id[REG_NUMBER + 1];		
+	unsigned int		register_id[REG_NUMBER + 1];
 	struct s_carriage	*next;
 }				t_carriage;
 
@@ -65,10 +67,12 @@ typedef struct	s_vm
 {
 	WINDOW			*w;
 	WINDOW			*info;
+	Mix_Music		*music;
 	t_flags			*flags;
 	t_bot			bot[4];
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
+	int				music_init;
 	int				x;
 	int				y;
 	int				argc;
@@ -103,5 +107,7 @@ void			visualization_init(t_vm *vm);
 int				check_key(int ch, t_vm *vm);
 void			draw_map(t_vm *vm);
 void			draw_info_table(t_vm *vm);
+void			sdl_mixer_init(t_vm *vm);
+void			npause(t_vm *vm);
 
 #endif

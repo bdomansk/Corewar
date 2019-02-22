@@ -45,10 +45,10 @@ static void	draw_run(t_vm *vm)
 	{
 		wattron(vm->info, COLOR_PAIR(2));
 		mvwprintw(vm->info, 1, 3, "RUNING\n");
-		if (vm->flags->m == 1)
+		if (vm->music_init == 1)
 			mvwprintw(vm->info, 1, 30, "MUSIC: Play\n");
 		wattroff(vm->info, COLOR_PAIR(2));
-		if (vm->flags->m == 0)
+		if (vm->music_init == 0)
 			mvwprintw(vm->info, 1, 30, "MUSIC: OFF\n");
 	}
 }

@@ -55,6 +55,8 @@ t_vm			*init_info(int argc, char **argv)
 	info->fd = 0;
 	info->argc = argc;
 	info->argv = argv;
+	info->music_init = 0;
+	info->music = NULL;
 	if (argc == 1)
 		put_manual(info);
 	return (info);

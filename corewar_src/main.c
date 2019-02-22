@@ -47,6 +47,8 @@ void		standart_output(t_vm *info)
 void		visulization(t_vm *vm)
 {
 	visualization_init(vm);
+	if (vm->flags->m)
+		sdl_mixer_init(vm);
 	while (42)
 	{
 		check_key(getch(), vm);
@@ -61,6 +63,8 @@ void		visulization(t_vm *vm)
 	delwin(vm->w);
 	delwin(vm->info);
 	endwin();
+	Mix_FreeMusic(vm->music);
+	Mix_CloseAudio();
 }
 
 int			main(int argc, char **argv)

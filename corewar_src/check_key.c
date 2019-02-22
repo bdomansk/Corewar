@@ -12,6 +12,10 @@
 
 #include "corewar.h"
 
+/*
+** Нужно добавить выключение музыки на vm->music_init && ch == 'm'
+*/
+
 int		check_key(int ch, t_vm *vm)
 {
 	int cycles;
@@ -31,9 +35,9 @@ int		check_key(int ch, t_vm *vm)
 		vm->cycles = ((cycles - 1) < 1) ? 1 : cycles - 1;
 	if (ch == 'd')
 		vm->cycles = 10;
-	/*if (vm->running && ch == ' ')
-		npause();
-	if (!g_base->music_init && ch == 'm')
-		sdl_mixer_init();*/
+	if (vm->running && ch == ' ')
+		npause(vm);
+	if (!vm->music_init && ch == 'm')
+		sdl_mixer_init(vm);
 	return (ch);
 }
