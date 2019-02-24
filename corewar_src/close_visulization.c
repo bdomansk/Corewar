@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_natural.c                                       :+:      :+:    :+:   */
+/*   close_visulization.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 15:05:30 by bdomansk          #+#    #+#             */
-/*   Updated: 2019/02/13 15:05:32 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/02/24 13:23:33 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/02/24 13:23:35 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		is_natural(char *s)
+void	close_visulization(t_vm *vm)
 {
-	int	i;
-
-	if (!s)
-		return (0);
-	i = (s[0] == '+') ? 1 : 0;
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+	delwin(vm->w);
+	delwin(vm->info);
+	endwin();
+	if (vm->music_init)
+		Mix_FreeMusic(vm->music);
+	Mix_CloseAudio();
 }

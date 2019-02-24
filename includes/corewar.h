@@ -17,7 +17,7 @@
 # include "SDL_mixer.h"
 # include <ncurses.h>
 # include <fcntl.h>
-# include "op.h"
+# include "op_corewar.h"
 # include <stdio.h> //потом убрать
 
 # define MUS_PATH "music/starwars.mp3"
@@ -56,8 +56,8 @@ typedef struct	s_carriage
 	int					carry;
 	int					alive;
 	int					position;
-	int					exec_command;
-	int					number_cycle;
+	int					exec_cmd;
+	int					cycles_left;
 	t_bot				parent;
 	unsigned int		register_id[REG_NUMBER + 1];
 	struct s_carriage	*next;
@@ -79,6 +79,7 @@ typedef struct	s_vm
 	int				fd;
 	int				delay;
 	int				cycles;
+	int				current_cycle;
 	int				running;
 	int				number_of_bots;
 	int				num_of_carriages;
@@ -101,9 +102,12 @@ unsigned int	reverse(unsigned int value, int size);
 
 void			define_bots_id(t_vm *info);
 void			fill_map(t_vm *info);
+
 void			new_carriage(t_vm *info, t_bot parent, int position);
+void			free_carriage(t_vm *info, int id);
 
 void			visualization_init(t_vm *vm);
+void			close_visulization(t_vm *vm);
 int				check_key(int ch, t_vm *vm);
 void			draw_map(t_vm *vm);
 void			draw_info_table(t_vm *vm);
@@ -111,5 +115,8 @@ void			sdl_mixer_init(t_vm *vm);
 void			npause(t_vm *vm);
 
 void			introducing_contestants(t_vm *vm);
+void			print_map(t_vm *vm);
+
+void			perform_carriages(t_vm *vm);
 
 #endif
