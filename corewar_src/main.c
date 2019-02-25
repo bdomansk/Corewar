@@ -17,6 +17,10 @@
 ** в визуализацию еще нужно добавить номер текущего цикла ( )
 */
 
+/*
+** Переделать структуру каретки, родитель должен быть указателем на бота.
+*/
+
 void		standart_output(t_vm *vm)
 {
 	introducing_contestants(vm);
@@ -63,6 +67,6 @@ int			main(int argc, char **argv)
 	define_bots_id(vm);
 	fill_map(vm);
 	(vm->flags->v) ? visulization(vm) : standart_output(vm);
-	bonuses(vm);
+	print_winner(vm); 
 	return (0);
 }

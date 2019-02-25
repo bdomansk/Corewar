@@ -70,6 +70,7 @@ typedef struct	s_vm
 	Mix_Music		*music;
 	t_flags			*flags;
 	t_bot			bot[4];
+	t_bot			*winner;
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
 	int				music_init;
@@ -97,7 +98,7 @@ t_vm			*init_info(int argc, char **argv);
 void			put_manual(t_vm *info);
 void			error(t_vm *info);
 void			error_reason(t_vm *info, char *reason);
-void			bonuses(t_vm *info);
+void			print_winner(t_vm *vm);
 
 void			parse_arguments(t_vm *info);
 int				is_natural(char *s);

@@ -14,9 +14,9 @@ NAME = ../corewar
 LIB = ../libft/libft.a
 LIBDIR = ../libft
 FLAGS = -Wall -Wextra -Werror 
-COREWAR_SRC = main.c init_info.c put_manual.c error.c parse_arguments.c \
-	bonuses.c is_natural.c check_bot.c reverse.c define_bots_id.c fill_map.c \
-	new_carriage.c visualization_init.c check_key.c draw_map.c \
+COREWAR_SRC = main.c init_info.c put_manual.c parse_arguments.c reverse.c \
+	print_winner.c is_natural.c check_bot.c error.c fill_map.c draw_map.c \
+	new_carriage.c visualization_init.c check_key.c define_bots_id.c  \
 	draw_info_table.c npause.c introducing_contestants.c sdl_mixer_init.c \
 	print_map.c close_visulization.c perform_carriages.c check_carriages.c \
 	ft_live.c 
