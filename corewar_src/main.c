@@ -20,15 +20,17 @@
 void		standart_output(t_vm *vm)
 {
 	introducing_contestants(vm);
-	while (vm->current_cycle < 1000)
+	while (vm->current_cycle < 10000)
 	{
 		if (vm->flags->dump && vm->current_cycle == vm->flags->dump_value)
 		{
 			print_map(vm);
-			break;
+			break ;
 		}
 		vm->current_cycle++;
 		perform_carriages(vm);
+		if (vm->cycle_to_die < 0 || vm->cycle_check == vm->current_cycle)
+			check_carriages(vm);
 	}
 }
 

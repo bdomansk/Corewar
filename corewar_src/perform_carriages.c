@@ -13,47 +13,48 @@
 #include "corewar.h"
 
 /*
-** Если в каретке еще не сохраненна команда, а место на котором стоит каретка 
+** Если в каретке еще не сохраненна команда, а место на котором стоит каретка
 ** содержит не коректную команду, то каретка передвигается на 1 шаг вперед.
 ** Иначе, если команда еще не записана, то записываев в каретку команду и
 ** количество циклов, которое картке нужно ожидать выполения команды.
 ** Уменьшаем количество циклов ожидания.
 ** Если количесвто циклов ожидания равно 0, то мы выполняем команду,
 ** передвигаем каретку, и убираем записаную команду из каретки.
-** В этом коментарии команда употреблялась в значении opcode.  
+** В этом коментарии команда употреблялась в значении opcode.
 */
 
-/*
-** Нужно будет убрать первый иф в отдельную функцию для нормирования.
-*/
+static void	perform_carriage(t_carriage *carr, t_vm *vm)
+{
+	int			pos;
 
-void	perform_carriages(t_vm *vm)
+	pos = carr->position;
+	if (!carr->exec_cmd && (vm->map[pos].cell > 16 || !vm->map[pos].cell))
+		carr->position = (pos + 1) % MEM_SIZE;
+	else
+	{
+		if (!carr->exec_cmd)
+		{
+			carr->exec_cmd = OPCODE(vm->map[pos].cell);
+			carr->cycles_left = CYCLES(carr->exec_cmd);
+		}
+		if (carr->cycles_left > 0)
+			carr->cycles_left--;
+		if (carr->cycles_left == 0)
+		{
+			ft_printf("Выполняем cmd %d, двигаем каретку\n", carr->exec_cmd);
+			carr->exec_cmd = 0;
+		}
+	}
+}
+
+void		perform_carriages(t_vm *vm)
 {
 	t_carriage	*start;
-	int			pos;
 
 	start = vm->carriage;
 	while (vm->carriage)
 	{
-		pos = vm->carriage->position;
-		if (!vm->carriage->exec_cmd && (vm->map[pos].cell > 16 ||
-			!vm->map[pos].cell))
-			vm->carriage->position = (pos + 1) % MEM_SIZE;
-		else
-		{
-			if (!vm->carriage->exec_cmd)
-			{
-				vm->carriage->exec_cmd = OPCODE(vm->map[pos].cell);
-				vm->carriage->cycles_left = CYCLES(vm->carriage->exec_cmd);
-			}
-			if (vm->carriage->cycles_left > 0)
-				vm->carriage->cycles_left--;
-			if (vm->carriage->cycles_left == 0)
-			{
-				ft_printf("Выполняем команду %d, и передвигаем каретку", vm->carriage->exec_cmd);
-				vm->carriage->exec_cmd = 0;
-			}
-		}
+		perform_carriage(vm->carriage, vm);
 		vm->carriage = vm->carriage->next;
 	}
 	vm->carriage = start;

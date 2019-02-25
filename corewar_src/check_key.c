@@ -13,12 +13,19 @@
 #include "corewar.h"
 
 /*
-** Нужно будет поменять как работает пауза в музыке
-** Чтобы при паузе было коректное отображение и песня не начинала играть
-** заново , а с того же места. если музыка включенна, то vm->musice != NULL
-** если нажата m нужно делать отденьную функцию, потому что уже > 25  строк
-** нужно на esc сразу выходить, потому что на паузе ретурн 0 не сработает
+** Нужно на esc сразу выходить, потому что на паузе ретурн 0 не сработает
 */
+
+void	music_key(t_vm *vm)
+{
+	if (!vm->music_init)
+		sdl_mixer_init(vm);
+	else
+	{
+		vm->music_init = 0;
+		Mix_PauseMusic();
+	}
+}
 
 int		check_key(int ch, t_vm *vm)
 {
@@ -41,14 +48,8 @@ int		check_key(int ch, t_vm *vm)
 		vm->cycles = 10;
 	if (vm->running && ch == ' ')
 		npause(vm);
-	if (!vm->music_init && ch == 'm')
-		sdl_mixer_init(vm);
-	else if (vm->music_init && ch == 'm')
-	{
-		vm->music_init = 0;
-		Mix_FreeMusic(vm->music);
-		Mix_CloseAudio();
-	}
+	if (ch == 'm' && vm->running)
+		music_key(vm);
 	if (ch == 27)
 		return (0);
 	return (ch);

@@ -48,8 +48,14 @@ static void	draw_run(t_vm *vm)
 		if (vm->music_init == 1)
 			mvwprintw(vm->info, 1, 30, "MUSIC: Play\n");
 		wattroff(vm->info, COLOR_PAIR(2));
-		if (vm->music_init == 0)
+		if (vm->music == NULL)
 			mvwprintw(vm->info, 1, 30, "MUSIC: OFF\n");
+		wattron(vm->info, COLOR_PAIR(4));
+		wattron(vm->info, A_BLINK);
+		if (!vm->music_init && vm->music)
+			mvwprintw(vm->info, 1, 30, "MUSIC: Stoped\n");
+		wattroff(vm->info, COLOR_PAIR(4));
+		wattroff(vm->info, A_BLINK);
 	}
 }
 

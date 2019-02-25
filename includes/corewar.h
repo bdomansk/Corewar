@@ -84,6 +84,10 @@ typedef struct	s_vm
 	int				number_of_bots;
 	int				num_of_carriages;
 	int				detalization_level;
+	int				cycle_check;
+	int				cycle_to_die;
+	int				number_of_lives;
+	int				number_of_checks;
 	int				available_id[5];
 	char			**argv;
 	char			*error_reason;
@@ -118,5 +122,6 @@ void			introducing_contestants(t_vm *vm);
 void			print_map(t_vm *vm);
 
 void			perform_carriages(t_vm *vm);
+void			check_carriages(t_vm *vm);
 
 #endif

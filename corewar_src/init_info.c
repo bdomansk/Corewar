@@ -58,6 +58,10 @@ t_vm			*init_info(int argc, char **argv)
 	info->current_cycle = 0;
 	info->music_init = 0;
 	info->music = NULL;
+	info->cycle_to_die = CYCLE_TO_DIE;
+	info->cycle_check = info->cycle_to_die;
+	info->number_of_checks = 0;
+	info->number_of_lives = 0;
 	if (argc == 1)
 		put_manual(info);
 	return (info);
