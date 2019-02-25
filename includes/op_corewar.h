@@ -13,7 +13,6 @@
 #ifndef OP_COREWAR_H
 
 # define OP_COREWAR_H
-
 # define IND_SIZE				2
 # define REG_SIZE				4
 # define DIR_SIZE				REG_SIZE
@@ -58,36 +57,5 @@ typedef char					t_arg_type;
 # define COREWAR_EXEC_MAGIC		0xea83f3
 # define CYCLES(i)				g_operations[i - 1].cycles
 # define OPCODE(i)				g_operations[i - 1].opcode
-
-typedef struct	s_operations
-{
-	char	*name;
-	int		opcode;
-	int		number_args;
-	int		type_args[3];
-	int		dir_size;
-	int		code_type;
-	int		cycles;
-}				t_operations;
-
-static t_operations g_operations[17] = {
-	{"live", 1, 1, {T_DIR, 0, 0}, 4, 0, 10},
-	{"ld", 2, 2, {T_DIR | T_IND, T_REG, 0}, 4, 1, 5},
-	{"st", 3, 2, {T_REG, T_IND | T_REG, 0}, 4, 1, 5},
-	{"add", 4, 3, {T_REG, T_REG, T_REG}, 4, 1, 10},
-	{"sub", 5, 3, {T_REG, T_REG, T_REG}, 4, 1, 10},
-	{"and", 6, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 4, 1, 6},
-	{"or", 7, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1, 6},
-	{"xor", 8, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 4, 1, 6},
-	{"zjmp", 9, 1, {T_DIR, 0, 0}, 2, 0, 20},
-	{"ldi", 10, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1, 25},
-	{"sti", 11, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 2, 1, 25},
-	{"fork", 12, 1, {T_DIR, 0, 0}, 2, 0, 800},
-	{"lld", 13, 2, {T_DIR | T_IND, T_REG, 0}, 4, 1, 10},
-	{"lldi", 14, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 2, 1, 50},
-	{"lfork", 15, 1, {T_DIR, 0, 0}, 2, 0, 1000},
-	{"aff", 16, 1, {T_REG, 0, 0}, 4, 1, 2},
-	{NULL, 0, 0, {0, 0, 0}, 0, 0, 0}
-};
 
 #endif

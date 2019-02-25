@@ -18,9 +18,10 @@ COREWAR_SRC = main.c init_info.c put_manual.c error.c parse_arguments.c \
 	bonuses.c is_natural.c check_bot.c reverse.c define_bots_id.c fill_map.c \
 	new_carriage.c visualization_init.c check_key.c draw_map.c \
 	draw_info_table.c npause.c introducing_contestants.c sdl_mixer_init.c \
-	print_map.c close_visulization.c perform_carriages.c check_carriages.c
+	print_map.c close_visulization.c perform_carriages.c check_carriages.c \
+	ft_live.c 
 COREWAR_OBJ = $(COREWAR_SRC:.c=.o)
-COREWAR_HEADER = ../includes/corewar.h ../includes/op.h
+COREWAR_HEADER = ../includes/corewar.h ../includes/op_corewar.h
 HEADER = -I ../includes
 HEADER += -I ../frameworks/SDL2.framework/Headers/
 HEADER += -I ../frameworks/SDL2_mixer.framework/Headers/ -F ../frameworks
