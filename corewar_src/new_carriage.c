@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	new_carriage(t_vm *info, t_bot parent, int position)
+void	new_carriage(t_vm *info, t_bot *parent, int position)
 {
 	t_carriage *new;
 
@@ -26,7 +26,7 @@ void	new_carriage(t_vm *info, t_bot parent, int position)
 	new->exec_cmd = 0;
 	new->cycles_left = 0;
 	new->parent = parent;
-	new->register_id[1] = -parent.id;
+	new->register_id[1] = -parent->id;
 	new->next = NULL;
 	if (info->carriage)
 		new->next = info->carriage;

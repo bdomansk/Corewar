@@ -67,6 +67,6 @@ int			main(int argc, char **argv)
 	define_bots_id(vm);
 	fill_map(vm);
 	(vm->flags->v) ? visulization(vm) : standart_output(vm);
-	print_winner(vm); 
+	print_winner(vm);
 	return (0);
 }

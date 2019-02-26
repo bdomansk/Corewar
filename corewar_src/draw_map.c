@@ -27,7 +27,7 @@ static int	check_carriage(t_vm *vm, int pos)
 	while (temp)
 	{
 		if (temp->position == pos)
-			return (temp->parent.id);
+			return (temp->parent->id);
 		temp = temp->next;
 	}
 	return (0);
