@@ -12,10 +12,6 @@
 
 #include "corewar.h"
 
-/*
-** Нужно на esc сразу выходить, потому что на паузе ретурн 0 не сработает
-*/
-
 void	music_key(t_vm *vm)
 {
 	if (!vm->music_init)
@@ -51,6 +47,6 @@ int		check_key(int ch, t_vm *vm)
 	if (ch == 'm' && vm->running)
 		music_key(vm);
 	if (ch == 27)
-		return (0);
+		close_visulization(vm);
 	return (ch);
 }

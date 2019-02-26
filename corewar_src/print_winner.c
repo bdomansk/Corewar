@@ -35,4 +35,5 @@ void	print_winner(t_vm *vm)
 		system("leaks corewar");
 	if (vm->flags->m)
 		system("afplay music/Winning.mp3&");
+	exit(0);
 }

@@ -20,4 +20,5 @@ void	close_visulization(t_vm *vm)
 	if (vm->music_init)
 		Mix_FreeMusic(vm->music);
 	Mix_CloseAudio();
+	print_winner(vm);
 }
