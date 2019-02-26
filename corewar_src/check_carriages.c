@@ -27,12 +27,14 @@
 void	check_carriages(t_vm *vm)
 {
 	vm->number_of_checks++;
-	ft_printf("Проверяем все каретки, и удаляем мертвые\n");
+	if (!vm->flags->v)
+		ft_printf("Проверяем все каретки, и удаляем мертвые\n");
 	if (vm->number_of_lives >= NBR_LIVE || vm->number_of_checks == MAX_CHECKS)
 	{
 		vm->number_of_checks = 0;
 		vm->cycle_to_die = vm->cycle_to_die - CYCLE_DELTA;
 	}
-	ft_printf("Обновляем количество операций live для всех ботов и общее\n");
+	if (!vm->flags->v)
+		ft_printf("Обновляем количество операций live для всех ботов и общее\n");
 	vm->cycle_check = vm->current_cycle + vm->cycle_to_die;
 }

@@ -41,7 +41,8 @@ static void	perform_carriage(t_carriage *carr, t_vm *vm)
 			carr->cycles_left--;
 		if (carr->cycles_left == 0)
 		{
-			ft_printf("Выполняем cmd %d, двигаем каретку\n", carr->exec_cmd);
+			if (!vm->flags->v)
+				ft_printf("Выполняем cmd %d, двигаем каретку\n", carr->exec_cmd);
 			g_operations[carr->exec_cmd - 1].function(vm, carr);
 			carr->exec_cmd = 0;
 		}

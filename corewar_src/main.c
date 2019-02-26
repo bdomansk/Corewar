@@ -40,8 +40,12 @@ void		visulization(t_vm *vm)
 	visualization_init(vm);
 	if (vm->flags->m)
 		sdl_mixer_init(vm);
-	while (42)
+	while (vm->current_cycle < 10000)
 	{
+		vm->current_cycle++;
+		perform_carriages(vm);
+		if (vm->cycle_to_die < 0 || vm->cycle_check == vm->current_cycle)
+			check_carriages(vm);
 		check_key(getch(), vm);
 		werase(vm->w);
 		werase(vm->info);
@@ -49,7 +53,7 @@ void		visulization(t_vm *vm)
 		draw_info_table(vm);
 		wrefresh(vm->w);
 		wrefresh(vm->info);
-		usleep(vm->delay / vm->cycles);
+		usleep(vm->delay / vm->cycles_in_second);
 	}
 	close_visulization(vm);
 }

@@ -61,6 +61,6 @@ void		visualization_init(t_vm *vm)
 	vm->w = newwin(66, 195, 0, 0);
 	vm->info = newwin(66, 50, 0, 194);
 	vm->delay = 1000000;
-	vm->cycles = 10;
+	vm->cycles_in_second = 10;
 	vm->running = 1;
 }
