@@ -26,17 +26,23 @@ static void	get_cycles_value(t_vm *info, int *i, int bytes)
 	(*i)++;
 }
 
-static void	get_detalization_level(t_vm *info, int *i)
+static void	get_detalization_level(t_vm *vm, int *i)
 {
+	int	detail;
+
 	(*i)++;
-	if (*i >= info->argc || !is_natural(info->argv[*i]))
-		info->error_reason = "Wrong level of detalization after the flag -s";
-	else if (ft_atoi(info->argv[*i]) > 32)
-		info->error_reason = "Level of detalization after the flag -s > 32";
-	if (info->error_reason)
-		put_manual(info);
-	info->flags->s = 1;
-	info->detalization_level = ft_atoi(info->argv[*i]);
+	if (*i >= vm->argc || !is_natural(vm->argv[*i]))
+		vm->error_reason = "Wrong level of detalization after the flag -s";
+	else if (ft_atoi(vm->argv[*i]) > 31)
+		vm->error_reason = "Level of detalization after the flag -s > 31";
+	if (vm->error_reason)
+		put_manual(vm);
+	detail = ft_atoi(vm->argv[*i]);
+	vm->flags->lives = ((detail | 1) == detail) ? 1 : vm->flags->lives;
+	vm->flags->cycles = ((detail | 2) == detail) ? 1 : vm->flags->cycles;
+	vm->flags->ops = ((detail | 4) == detail) ? 1 : vm->flags->ops;
+	vm->flags->deaths = ((detail | 8) == detail) ? 1 : vm->flags->deaths;
+	vm->flags->moves = ((detail | 16) == detail) ? 1 : vm->flags->moves;
 	(*i)++;
 }
 

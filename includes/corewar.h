@@ -29,11 +29,15 @@ typedef struct	s_flags
 	int	c;
 	int v;
 	int	m;
-	int	s;
 	int	n;
 	int	dump;
 	int	dump_value;
 	int	dump_bytes;
+	int	lives;
+	int	cycles;
+	int	ops;
+	int	deaths;
+	int	moves;
 }				t_flags;
 
 typedef struct	s_bot
@@ -85,7 +89,6 @@ typedef struct	s_vm
 	int				running;
 	int				number_of_bots;
 	int				num_of_carriages;
-	int				detalization_level;
 	int				cycle_check;
 	int				cycle_to_die;
 	int				number_of_lives;

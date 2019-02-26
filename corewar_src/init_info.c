@@ -22,11 +22,15 @@ static t_flags	*init_flags(void)
 	flags->c = 0;
 	flags->v = 0;
 	flags->m = 0;
-	flags->s = 0;
 	flags->n = 0;
 	flags->dump = 0;
 	flags->dump_value = 0;
 	flags->dump_bytes = 0;
+	flags->lives = 0;
+	flags->cycles = 0;
+	flags->ops = 0;
+	flags->deaths = 0;
+	flags->moves = 0;
 	return (flags);
 }
 
@@ -52,7 +56,6 @@ t_vm			*init_info(int argc, char **argv)
 	info->number_of_bots = 0;
 	info->num_of_carriages = 0;
 	info->error_reason = NULL;
-	info->detalization_level = 0;
 	info->fd = 0;
 	info->argc = argc;
 	info->argv = argv;
