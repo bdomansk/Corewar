@@ -26,6 +26,7 @@ static t_flags	*init_flags(void)
 	flags->n = 0;
 	flags->dump = 0;
 	flags->dump_value = 0;
+	flags->dump_bytes = 0;
 	return (flags);
 }
 

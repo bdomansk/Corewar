@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void	get_cycles_value(t_vm *info, int *i)
+static void	get_cycles_value(t_vm *info, int *i, int bytes)
 {
 	(*i)++;
 	if (*i >= info->argc || !is_natural(info->argv[*i]))
@@ -22,6 +22,7 @@ static void	get_cycles_value(t_vm *info, int *i)
 	}
 	info->flags->dump = 1;
 	info->flags->dump_value = ft_atoi(info->argv[*i]);
+	info->flags->dump_bytes = bytes;
 	(*i)++;
 }
 
@@ -96,13 +97,17 @@ static void	get_flags(t_vm *info, int *num)
 
 void		parse_arguments(t_vm *info)
 {
-	int	i;
+	char	*arg;
+	int		i;
 
 	i = 1;
 	while (i < info->argc)
 	{
-		if (!ft_strcmp(info->argv[i], "-dump"))
-			get_cycles_value(info, &i);
+		arg = info->argv[i];
+		if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-dump64"))
+			get_cycles_value(info, &i, 64);
+		else if (!ft_strcmp(arg, "-dump32"))
+			get_cycles_value(info, &i, 32);
 		else if (!ft_strcmp(info->argv[i], "-s"))
 			get_detalization_level(info, &i);
 		else if (!ft_strcmp(info->argv[i], "-n"))

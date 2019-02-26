@@ -33,6 +33,7 @@ typedef struct	s_flags
 	int	n;
 	int	dump;
 	int	dump_value;
+	int	dump_bytes;
 }				t_flags;
 
 typedef struct	s_bot

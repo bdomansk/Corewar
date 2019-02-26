@@ -19,13 +19,15 @@
 static void	print_colour_map(t_vm *vm)
 {
 	int i;
+	int	bytes;
 
 	i = 0;
+	bytes = vm->flags->dump_bytes;
 	while (i < MEM_SIZE)
 	{
-		if (i && (i % 64) == 0)
+		if (i && (i % bytes) == 0)
 			ft_printf("\n");
-		if (i % 64 == 0)
+		if (i % bytes == 0)
 			ft_printf("\033[90m0x%04x :\033[0m", i);
 		if (vm->map[i].color == 10)
 			ft_printf("\033[90m %0.2x\033[0m", vm->map[i].cell);
@@ -45,17 +47,19 @@ static void	print_colour_map(t_vm *vm)
 void		print_map(t_vm *vm)
 {
 	int i;
+	int	bytes;
 
 	i = 0;
+	bytes = vm->flags->dump_bytes;
 	if (vm->flags->c)
 		print_colour_map(vm);
 	else
 	{
 		while (i < MEM_SIZE)
 		{
-			if (i && (i % 64) == 0)
+			if (i && (i % bytes) == 0)
 				ft_printf("\n");
-			if (i % 64 == 0)
+			if (i % bytes == 0)
 				ft_printf("0x%04x :", i);
 			ft_printf(" %0.2x", vm->map[i].cell);
 			i++;
