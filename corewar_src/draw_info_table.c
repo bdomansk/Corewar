@@ -24,10 +24,10 @@ static void	draw_bots(t_vm *vm)
 	while (i < vm->number_of_bots)
 	{
 		wattron(vm->info, COLOR_PAIR(vm->bot[i].id));
-		mvwprintw(vm->info, 5 + (i * 6), 3, "Champ : %s\n", vm->bot[i].name);
+		mvwprintw(vm->info, 7 + (i * 5), 3, "Champ : %s\n", vm->bot[i].name);
 		wattroff(vm->info, COLOR_PAIR(vm->bot[i].id));
-		mvwprintw(vm->info, 5 + (i * 6) + 1, 5, "Lives\t\t%d\n", 0);
-		mvwprintw(vm->info, 5 + (i * 6) + 2, 5, "Something else\t%d\n", 0);
+		mvwprintw(vm->info, 7 + (i * 5) + 1, 5, "Lives\t\t%d\n", 0);
+		mvwprintw(vm->info, 7 + (i * 5) + 2, 5, "Something else\t%d\n", 0);
 		i++;
 	}
 }
@@ -66,9 +66,9 @@ static void	draw_info(t_vm *vm)
 	n = 5 + (vm->number_of_bots * 6) + 2;
 	draw_run(vm);
 	mvwprintw(vm->info, 3, 3, "Cycles/second : %d\n", vm->cycles_in_second);
-	mvwprintw(vm->info, 4, 3, "Current cycle : %d\n", vm->current_cycle);
-	mvwprintw(vm->info, 58, 3, "Q : -100\tW : -10\t\tR : -1\n");
-	mvwprintw(vm->info, 59, 3, "T : +1\tT : +10\t\tY : +100\n");
+	mvwprintw(vm->info, 5, 3, "Current cycle : %d\n", vm->current_cycle);
+	mvwprintw(vm->info, 58, 3, "Q : +100\tW : +10\t\tE : +1\n");
+	mvwprintw(vm->info, 59, 3, "R : -1\tT : -10\t\tY : -100\n");
 	mvwprintw(vm->info, n, 3, "CYCLE_TO_DIE\t\t%d\n", vm->cycle_to_die);
 	mvwprintw(vm->info, n + 2, 3, "CYCLE_DELTA\t\t%d\n", CYCLE_DELTA);
 	mvwprintw(vm->info, n + 4, 3, "NBR_LIVE\t\t%d\n", NBR_LIVE);

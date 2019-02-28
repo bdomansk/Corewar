@@ -19,7 +19,7 @@ static void	draw_elem(t_vm *vm, int i, int pair)
 	wattroff(vm->w, COLOR_PAIR(pair));
 }
 
-static int	check_carriage(t_vm *vm, int pos)
+static int	check_carriage(t_vm *vm, unsigned int pos)
 {
 	t_carriage *temp;
 

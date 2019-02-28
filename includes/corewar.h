@@ -18,9 +18,6 @@
 # include <ncurses.h>
 # include <fcntl.h>
 # include "op_corewar.h"
-# include <stdio.h> //потом убрать
-
-# define MUS_PATH "music/starwars.mp3"
 
 typedef struct	s_flags
 {
@@ -59,11 +56,10 @@ typedef struct	s_carriage
 {
 	int					id;
 	int					carry;
-	int					alive;
-	int					position;
-	int					exec_cmd;
+	int					opcode;
 	int					cycles_left;
 	t_bot				*parent;
+	unsigned int		position;
 	unsigned int		register_id[REG_NUMBER + 1];
 	struct s_carriage	*next;
 }				t_carriage;
@@ -128,6 +124,18 @@ typedef struct	s_vm
 	char			*error_reason;
 }				t_vm;
 
+typedef struct	s_operations
+{
+	char	*name;
+	int		opcode;
+	int		number_args;
+	int		type_args[3];
+	int		dir_size;
+	int		code_type;
+	int		cycles;
+	void	(*function)(t_vm *, t_carriage *);
+}				t_operations;
+
 t_vm			*init_info(int argc, char **argv);
 void			put_manual(t_vm *info);
 void			error(t_vm *info);
@@ -159,181 +167,9 @@ void			print_map(t_vm *vm);
 void			perform_carriages(t_vm *vm);
 void			check_carriages(t_vm *vm);
 
+unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
+
 void			ft_live(t_vm *vm, t_carriage *carriage);
-
-typedef struct	s_operations
-{
-	char	*name;
-	int		opcode;
-	int		number_args;
-	int		type_args[3];
-	int		dir_size;
-	int		code_type;
-	int		cycles;
-	void	(*function)(t_vm *, t_carriage *);
-}				t_operations;
-
-static t_operations g_operations[16] = {
-	{
-		.name = "live",
-		.opcode = 1,
-		.number_args = 1,
-		.type_args = {T_DIR, 0, 0},
-		.dir_size = 4,
-		.code_type = 0,
-		.cycles = 10,
-		.function = &ft_live
-	},
-	{
-		.name = "ld",
-		.opcode = 2,
-		.number_args = 2,
-		.type_args = {T_DIR | T_IND, T_REG, 0},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 5,
-		.function = &ft_live
-	},
-	{
-		.name = "st",
-		.opcode = 3,
-		.number_args = 2,
-		.type_args = {T_REG, T_IND | T_REG, 0},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 5,
-		.function = &ft_live
-	},
-	{
-		.name = "add",
-		.opcode = 4,
-		.number_args = 3,
-		.type_args = {T_REG, T_REG, T_REG},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 10,
-		.function = &ft_live
-	},
-	{
-		.name = "sub",
-		.opcode = 5,
-		.number_args = 3,
-		.type_args = {T_REG, T_REG, T_REG},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 10,
-		.function = &ft_live
-	},
-	{
-		.name = "and",
-		.opcode = 6,
-		.number_args = 3,
-		.type_args = {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 6,
-		.function = &ft_live
-	},
-	{
-		.name = "or",
-		.opcode = 7,
-		.number_args = 3,
-		.type_args = {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 6,
-		.function = &ft_live
-	},
-	{
-		.name = "xor",
-		.opcode = 8,
-		.number_args = 3,
-		.type_args = {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 6,
-		.function = &ft_live
-	},
-	{
-		.name = "zjmp",
-		.opcode = 9,
-		.number_args = 1,
-		.type_args = {T_DIR, 0, 0},
-		.dir_size = 2,
-		.code_type = 0,
-		.cycles = 20,
-		.function = &ft_live
-	},
-	{
-		.name = "ldi",
-		.opcode = 10,
-		.number_args = 3,
-		.type_args = {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		.dir_size = 2,
-		.code_type = 1,
-		.cycles = 25,
-		.function = &ft_live
-	},
-	{
-		.name = "sti",
-		.opcode = 11,
-		.number_args = 3,
-		.type_args = {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG},
-		.dir_size = 2,
-		.code_type = 1,
-		.cycles = 25,
-		.function = &ft_live
-	},
-	{
-		.name = "fork",
-		.opcode = 12,
-		.number_args = 1,
-		.type_args = {T_DIR, 0, 0},
-		.dir_size = 2,
-		.code_type = 0,
-		.cycles = 800,
-		.function = &ft_live
-	},
-	{
-		.name = "lld",
-		.opcode = 13,
-		.number_args = 2,
-		.type_args = {T_DIR | T_IND, T_REG, 0},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 10,
-		.function = &ft_live
-	},
-	{
-		.name = "lldi",
-		.opcode = 14,
-		.number_args = 3,
-		.type_args = {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		.dir_size = 2,
-		.code_type = 1,
-		.cycles = 50,
-		.function = &ft_live
-	},
-	{
-		.name = "lfork",
-		.opcode = 15,
-		.number_args = 1,
-		.type_args = {T_DIR, 0, 0},
-		.dir_size = 2,
-		.code_type = 0,
-		.cycles = 1000,
-		.function = &ft_live
-	},
-	{
-		.name = "aff",
-		.opcode = 16,
-		.number_args = 1,
-		.type_args = {T_REG, 0, 0},
-		.dir_size = 4,
-		.code_type = 1,
-		.cycles = 2,
-		.function = &ft_live
-	}
-};
+void			ft_zjmp(t_vm *vm, t_carriage *carriage);
 
 #endif

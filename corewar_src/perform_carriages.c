@@ -23,28 +23,30 @@
 ** В этом коментарии команда употреблялась в значении opcode.
 */
 
+extern const t_operations g_operations[16];
+
 static void	perform_carriage(t_carriage *carr, t_vm *vm)
 {
 	int			pos;
 
 	pos = carr->position;
-	if (!carr->exec_cmd && (vm->map[pos].cell > 16 || !vm->map[pos].cell))
+	if (!carr->opcode && (vm->map[pos].cell > 16 || !vm->map[pos].cell))
 		carr->position = (pos + 1) % MEM_SIZE;
 	else
 	{
-		if (!carr->exec_cmd)
+		if (!carr->opcode)
 		{
-			carr->exec_cmd = OPCODE(vm->map[pos].cell);
-			carr->cycles_left = CYCLES(carr->exec_cmd);
+			carr->opcode = OPCODE(vm->map[pos].cell);
+			carr->cycles_left = CYCLES(carr->opcode);
 		}
 		if (carr->cycles_left > 0)
 			carr->cycles_left--;
 		if (carr->cycles_left == 0)
 		{
 			if (!vm->flags->v)
-				ft_printf("Выполняем cmd %d, двигаем каретку\n", carr->exec_cmd);
-			g_operations[carr->exec_cmd - 1].function(vm, carr);
-			carr->exec_cmd = 0;
+				ft_printf("Выпол. cmd%d, двигаем каретку\n", carr->opcode);
+			g_operations[carr->opcode - 1].function(vm, carr);
+			carr->opcode = 0;
 		}
 	}
 }

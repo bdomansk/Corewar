@@ -28,17 +28,17 @@ int		check_key(int ch, t_vm *vm)
 	int cycles;
 
 	cycles = vm->cycles_in_second;
-	if (ch == 'y')
-		vm->cycles_in_second = ((cycles + 100) > 1000) ? 1000 : cycles + 100;
-	if (ch == 't')
-		vm->cycles_in_second = ((cycles + 10) > 1000) ? 1000 : cycles + 10;
-	if (ch == 'r')
-		vm->cycles_in_second = ((cycles + 1) > 1000) ? 1000 : cycles + 1;
 	if (ch == 'q')
-		vm->cycles_in_second = ((cycles - 100) < 1) ? 1 : cycles - 100;
+		vm->cycles_in_second = ((cycles + 100) > 1000) ? 1000 : cycles + 100;
 	if (ch == 'w')
-		vm->cycles_in_second = ((cycles - 10) < 1) ? 1 : cycles - 10;
+		vm->cycles_in_second = ((cycles + 10) > 1000) ? 1000 : cycles + 10;
 	if (ch == 'e')
+		vm->cycles_in_second = ((cycles + 1) > 1000) ? 1000 : cycles + 1;
+	if (ch == 'y')
+		vm->cycles_in_second = ((cycles - 100) < 1) ? 1 : cycles - 100;
+	if (ch == 't')
+		vm->cycles_in_second = ((cycles - 10) < 1) ? 1 : cycles - 10;
+	if (ch == 'r')
 		vm->cycles_in_second = ((cycles - 1) < 1) ? 1 : cycles - 1;
 	if (ch == 'd')
 		vm->cycles_in_second = 10;

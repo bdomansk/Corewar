@@ -17,6 +17,10 @@
 ** в визуализацию еще нужно добавить номер текущего цикла ( )
 */
 
+/*
+** Показать Владу где дергается визуализация
+*/
+
 void		standart_output(t_vm *vm)
 {
 	introducing_contestants(vm);
@@ -24,12 +28,12 @@ void		standart_output(t_vm *vm)
 	{
 		if (vm->flags->dump && vm->current_cycle == vm->flags->dump_value)
 		{
-			print_map(vm);
+			//print_map(vm);
 			break ;
 		}
 		vm->current_cycle++;
 		perform_carriages(vm);
-		if (vm->cycle_to_die < 0 || vm->cycle_check == vm->current_cycle)
+		if (vm->cycle_check == vm->current_cycle)
 			check_carriages(vm);
 	}
 	print_winner(vm);
@@ -38,19 +42,18 @@ void		standart_output(t_vm *vm)
 void		visulization(t_vm *vm)
 {
 	visualization_init(vm);
-	if (vm->flags->m)
-		sdl_mixer_init(vm);
+	npause(vm);
 	while (vm->current_cycle < 10000)
 	{
-		vm->current_cycle++;
-		perform_carriages(vm);
-		if (vm->cycle_to_die < 0 || vm->cycle_check == vm->current_cycle)
-			check_carriages(vm);
 		check_key(getch(), vm);
 		werase(vm->w);
 		werase(vm->info);
 		draw_map(vm);
 		draw_info_table(vm);
+		vm->current_cycle++;
+		perform_carriages(vm);
+		if (vm->cycle_check == vm->current_cycle)
+			check_carriages(vm);
 		wrefresh(vm->w);
 		wrefresh(vm->info);
 		usleep(vm->delay / vm->cycles_in_second);

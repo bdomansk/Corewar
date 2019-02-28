@@ -35,6 +35,9 @@ void	check_carriages(t_vm *vm)
 		vm->cycle_to_die = vm->cycle_to_die - CYCLE_DELTA;
 	}
 	if (!vm->flags->v)
-		ft_printf("Обновляем количество операций live для всех ботов и общее\n");
-	vm->cycle_check = vm->current_cycle + vm->cycle_to_die;
+		ft_printf("Обновляем кол-во операций live для всех ботов и общее\n");
+	if (vm->cycle_to_die > 0)
+		vm->cycle_check = vm->current_cycle + vm->cycle_to_die;
+	else
+		vm->cycle_check = vm->current_cycle + 1;
 }

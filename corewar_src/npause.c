@@ -19,22 +19,25 @@ void	npause(t_vm *vm)
 	while (!vm->running)
 	{
 		werase(vm->info);
+		werase(vm->w);
+		draw_map(vm);
+		draw_info_table(vm);
 		wattron(vm->info, COLOR_PAIR(4));
 		wattron(vm->info, A_BLINK);
-		mvwprintw(vm->info, 1, 3, "STOPED\n");
+		mvwprintw(vm->info, 1, 3, "STOPED");
 		if (vm->music)
-			mvwprintw(vm->info, 1, 30, "MUSIC: Stoped\n");
+			mvwprintw(vm->info, 1, 30, "MUSIC: Stoped");
 		wattroff(vm->info, COLOR_PAIR(4));
 		wattroff(vm->info, A_BLINK);
 		if (vm->music == NULL)
-			mvwprintw(vm->info, 1, 30, "MUSIC: OFF\n");
-		draw_info_table(vm);
-		wrefresh(vm->info);
+			mvwprintw(vm->info, 1, 30, "MUSIC: OFF");
 		if (check_key(getch(), vm) == ' ')
 		{
 			if (vm->music_init)
 				Mix_ResumeMusic();
 			vm->running = 1;
 		}
+		wrefresh(vm->info);
+		wrefresh(vm->w);
 	}
 }

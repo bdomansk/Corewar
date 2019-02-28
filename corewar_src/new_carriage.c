@@ -22,8 +22,7 @@ void	new_carriage(t_vm *info, t_bot *parent, int position)
 	new->id = info->num_of_carriages;
 	new->position = position;
 	new->carry = 0;
-	new->alive = 0;
-	new->exec_cmd = 0;
+	new->opcode = 0;
 	new->cycles_left = 0;
 	new->parent = parent;
 	new->register_id[1] = -parent->id;

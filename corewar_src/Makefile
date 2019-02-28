@@ -19,7 +19,7 @@ COREWAR_SRC = main.c init_info.c put_manual.c parse_arguments.c reverse.c \
 	new_carriage.c visualization_init.c check_key.c define_bots_id.c  \
 	draw_info_table.c npause.c introducing_contestants.c sdl_mixer_init.c \
 	print_map.c close_visulization.c perform_carriages.c check_carriages.c \
-	ft_live.c 
+	ft_live.c operations.c ft_zjmp.c get_arg_from_map.c 
 COREWAR_OBJ = $(COREWAR_SRC:.c=.o)
 COREWAR_HEADER = ../includes/corewar.h ../includes/op_corewar.h
 HEADER = -I ../includes

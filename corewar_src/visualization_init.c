@@ -63,4 +63,6 @@ void		visualization_init(t_vm *vm)
 	vm->delay = 1000000;
 	vm->cycles_in_second = 10;
 	vm->running = 1;
+	if (vm->flags->m)
+		sdl_mixer_init(vm);
 }
