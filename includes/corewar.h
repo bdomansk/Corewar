@@ -57,6 +57,7 @@ typedef struct	s_carriage
 	int					id;
 	int					carry;
 	int					opcode;
+	int					arg_type[3];
 	int					cycles_left;
 	t_bot				*parent;
 	unsigned int		position;
@@ -167,6 +168,7 @@ void			print_map(t_vm *vm);
 void			perform_carriages(t_vm *vm);
 void			check_carriages(t_vm *vm);
 
+int				check_code_type(t_vm *vm, t_carriage *carriage);
 unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
 
 void			ft_live(t_vm *vm, t_carriage *carriage);

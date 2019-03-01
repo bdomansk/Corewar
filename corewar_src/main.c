@@ -28,7 +28,7 @@ void		standart_output(t_vm *vm)
 	{
 		if (vm->flags->dump && vm->current_cycle == vm->flags->dump_value)
 		{
-			//print_map(vm);
+			print_map(vm);
 			break ;
 		}
 		vm->current_cycle++;

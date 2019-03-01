@@ -59,5 +59,7 @@ typedef char					t_arg_type;
 # define CYCLES(i)				g_operations[i - 1].cycles
 # define OPCODE(i)				g_operations[i - 1].opcode
 # define SIZE_DIR(i)			g_operations[i - 1].dir_size
+# define CODE_TYPE(i)			g_operations[i - 1].code_type
+# define NUMBER_ARGS(i)			g_operations[i - 1].number_args
 
 #endif
