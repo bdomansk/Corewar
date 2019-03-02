@@ -61,5 +61,6 @@ typedef char					t_arg_type;
 # define SIZE_DIR(i)			g_operations[i - 1].dir_size
 # define CODE_TYPE(i)			g_operations[i - 1].code_type
 # define NUMBER_ARGS(i)			g_operations[i - 1].number_args
+# define TYPE_ARG(i, j)			g_operations[i - 1].type_args[j]
 
 #endif

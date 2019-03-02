@@ -46,7 +46,7 @@ static void	perform_carriage(t_carriage *carr, t_vm *vm)
 		}
 		if (carr->cycles_left > 0)
 			carr->cycles_left--;
-		if (carr->cycles_left == 0 && check_code_type(vm, carr))
+		if (carr->cycles_left == 0)
 		{
 			if (check_code_type(vm, carr))
 			{

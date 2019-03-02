@@ -46,15 +46,50 @@ static void	read_code_type(t_vm *vm, t_carriage *carriage)
 		carriage->arg_type[2] = find_type((code_type >> 2) & 3);
 }
 
+static int	check_similarity(t_carriage *carriage)
+{
+	int	i;
+	int	number_of_arguments;
+	int	desired_type;
+
+	number_of_arguments = NUMBER_ARGS(carriage->opcode);
+	i = 0;
+	while (i < number_of_arguments)
+	{
+		desired_type = TYPE_ARG(carriage->opcode, i);
+		if (!carriage->arg_type[i])
+			return (0);
+		if ((desired_type | carriage->arg_type[i]) != desired_type)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void	fill_arguments(t_carriage *carriage)
+{
+	int	i;
+	int	number_of_arguments;
+
+	number_of_arguments = NUMBER_ARGS(carriage->opcode);
+	i = 0;
+	while (i < number_of_arguments)
+	{
+		carriage->arg_type[i] = TYPE_ARG(carriage->opcode, i);
+		i++;
+	}
+}
+
 int			check_code_type(t_vm *vm, t_carriage *carriage)
 {
-	(void)vm;
 	if (CODE_TYPE(carriage->opcode))
 	{
 		carriage->position = (carriage->position + 1) % MEM_SIZE;
 		read_code_type(vm, carriage);
+		if (!check_similarity(carriage))
+			return (0);
 	}
-	//else
-	//	fill_arguments(carriage);
-	return (1);
+	else
+		fill_arguments(carriage);
+	return (check_registers(vm, carriage));
 }

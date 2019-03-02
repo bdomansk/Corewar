@@ -169,6 +169,7 @@ void			perform_carriages(t_vm *vm);
 void			check_carriages(t_vm *vm);
 
 int				check_code_type(t_vm *vm, t_carriage *carriage);
+int				check_registers(t_vm *vm, t_carriage *carriage);
 unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
 
 void			ft_live(t_vm *vm, t_carriage *carriage);
