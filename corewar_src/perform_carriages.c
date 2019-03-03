@@ -30,6 +30,13 @@
 
 extern const t_operations g_operations[16];
 
+static void	fill_carriage_info(t_map *map, t_carriage *carriage)
+{
+	carriage->opcode = OPCODE(map[carriage->position].cell);
+	carriage->cycles_left = CYCLES(carriage->opcode);
+	carriage->number_of_arguments = NUMBER_ARGS(carriage->opcode);
+}
+
 static void	perform_carriage(t_carriage *carr, t_vm *vm)
 {
 	int			pos;
@@ -40,10 +47,7 @@ static void	perform_carriage(t_carriage *carr, t_vm *vm)
 	else
 	{
 		if (!carr->opcode)
-		{
-			carr->opcode = OPCODE(vm->map[pos].cell);
-			carr->cycles_left = CYCLES(carr->opcode);
-		}
+			fill_carriage_info(vm->map, carr);
 		if (carr->cycles_left > 0)
 			carr->cycles_left--;
 		if (carr->cycles_left == 0)
@@ -54,7 +58,7 @@ static void	perform_carriage(t_carriage *carr, t_vm *vm)
 				g_operations[carr->opcode - 1].function(vm, carr);
 			}
 			else
-				ft_printf("Двигаем каретку на значение кодировки типов\n");
+				move_carriage(carr);
 			carr->opcode = 0;
 		}
 	}

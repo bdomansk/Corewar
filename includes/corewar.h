@@ -59,9 +59,10 @@ typedef struct	s_carriage
 	int					opcode;
 	int					arg_type[3];
 	int					cycles_left;
+	int					number_of_arguments;
+	int					register_id[REG_NUMBER + 1];
 	t_bot				*parent;
 	unsigned int		position;
-	unsigned int		register_id[REG_NUMBER + 1];
 	struct s_carriage	*next;
 }				t_carriage;
 
@@ -166,10 +167,12 @@ void			introducing_contestants(t_vm *vm);
 void			print_map(t_vm *vm);
 
 void			perform_carriages(t_vm *vm);
+void			move_carriage(t_carriage *carriage);
 void			check_carriages(t_vm *vm);
 
 int				check_code_type(t_vm *vm, t_carriage *carriage);
 int				check_registers(t_vm *vm, t_carriage *carriage);
+int				get_size_by_type(t_carriage *carriage, int i);
 unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
 
 void			ft_live(t_vm *vm, t_carriage *carriage);

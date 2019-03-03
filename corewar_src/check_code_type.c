@@ -35,26 +35,22 @@ static int	find_type(unsigned char code)
 static void	read_code_type(t_vm *vm, t_carriage *carriage)
 {
 	unsigned char	code_type;
-	int				number_of_arguments;
 
 	code_type = get_arg_from_map(vm->map, carriage->position, 1);
-	number_of_arguments = NUMBER_ARGS(carriage->opcode);
 	carriage->arg_type[0] = find_type((code_type >> 6) & 3);
-	if (number_of_arguments > 1)
+	if (carriage->number_of_arguments > 1)
 		carriage->arg_type[1] = find_type((code_type >> 4) & 3);
-	if (number_of_arguments > 2)
+	if (carriage->number_of_arguments > 2)
 		carriage->arg_type[2] = find_type((code_type >> 2) & 3);
 }
 
 static int	check_similarity(t_carriage *carriage)
 {
 	int	i;
-	int	number_of_arguments;
 	int	desired_type;
 
-	number_of_arguments = NUMBER_ARGS(carriage->opcode);
 	i = 0;
-	while (i < number_of_arguments)
+	while (i < carriage->number_of_arguments)
 	{
 		desired_type = TYPE_ARG(carriage->opcode, i);
 		if (!carriage->arg_type[i])
@@ -69,11 +65,9 @@ static int	check_similarity(t_carriage *carriage)
 static void	fill_arguments(t_carriage *carriage)
 {
 	int	i;
-	int	number_of_arguments;
 
-	number_of_arguments = NUMBER_ARGS(carriage->opcode);
 	i = 0;
-	while (i < number_of_arguments)
+	while (i < carriage->number_of_arguments)
 	{
 		carriage->arg_type[i] = TYPE_ARG(carriage->opcode, i);
 		i++;
