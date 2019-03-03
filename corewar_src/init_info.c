@@ -67,6 +67,7 @@ t_vm			*init_info(int argc, char **argv)
 	info->number_of_checks = 0;
 	info->number_of_lives = 0;
 	info->winner = NULL;
+	info->last_live_bot = NULL;
 	if (argc == 1)
 		put_manual(info);
 	return (info);

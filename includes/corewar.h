@@ -41,6 +41,9 @@ typedef struct	s_bot
 {
 	int				id;
 	unsigned int	prog_size;
+	unsigned int	lives_current_period;
+	unsigned int	lives_last_period;
+	unsigned int	cycle_last_live;
 	unsigned char	*exec_code;
 	char			name[PROG_NAME_LENGTH + 1];
 	char			comment[COMMENT_LENGTH + 1];
@@ -57,6 +60,7 @@ typedef struct	s_carriage
 	int					id;
 	int					carry;
 	int					opcode;
+	int					alive;
 	int					arg_type[3];
 	int					cycles_left;
 	int					number_of_arguments;
@@ -73,6 +77,8 @@ typedef struct	s_carriage
 ** info - окно, где отображается информация при визуализации;
 ** flags - структура, где хранятся флаги, которые полученны при компиляции;
 ** bots - статичекая структура, где записанна вся информация про ботов;
+** last_live_bot - указатель на бота, над которым последний раз выполняли
+** операцию live
 ** winner - указатель на бота, который был выбран победетилем;
 ** map - структура, где хранится наша карта;
 ** carriage - список всех кареток;
@@ -103,6 +109,7 @@ typedef struct	s_vm
 	Mix_Music		*music;
 	t_flags			*flags;
 	t_bot			bot[4];
+	t_bot			*last_live_bot;
 	t_bot			*winner;
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
