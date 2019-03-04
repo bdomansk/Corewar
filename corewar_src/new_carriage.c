@@ -19,6 +19,7 @@ void	new_carriage(t_vm *info, t_bot *parent, int position)
 	if (!(new = malloc(sizeof(t_carriage))))
 		error_reason(info, "Memory was not allocated");
 	info->num_of_carriages++;
+	info->current_num_of_carriages++;
 	new->id = info->num_of_carriages;
 	new->position = position;
 	new->carry = 0;

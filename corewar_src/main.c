@@ -15,7 +15,7 @@
 void		standart_output(t_vm *vm)
 {
 	introducing_contestants(vm);
-	while (vm->current_cycle < 10000)
+	while (vm->current_num_of_carriages)
 	{
 		if (vm->flags->dump && vm->current_cycle == vm->flags->dump_value)
 		{
@@ -27,6 +27,7 @@ void		standart_output(t_vm *vm)
 		if (vm->cycle_check == vm->current_cycle)
 			check_carriages(vm);
 	}
+	ft_printf("%d\n", vm->current_cycle);
 	print_winner(vm);
 }
 
@@ -34,7 +35,7 @@ void		visulization(t_vm *vm)
 {
 	visualization_init(vm);
 	npause(vm);
-	while (vm->current_cycle < 10000)
+	while (vm->current_num_of_carriages)
 	{
 		check_key(getch(), vm);
 		werase(vm->w);
@@ -49,6 +50,7 @@ void		visulization(t_vm *vm)
 		wrefresh(vm->info);
 		usleep(vm->delay / vm->cycles_in_second);
 	}
+	npause(vm);
 	close_visulization(vm);
 }
 

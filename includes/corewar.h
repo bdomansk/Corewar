@@ -42,7 +42,7 @@ typedef struct	s_bot
 	int				id;
 	unsigned int	prog_size;
 	unsigned int	lives_current_period;
-	unsigned int	lives_last_period;
+	unsigned int	lives_previous_period;
 	unsigned int	cycle_last_live;
 	unsigned char	*exec_code;
 	char			name[PROG_NAME_LENGTH + 1];
@@ -79,7 +79,6 @@ typedef struct	s_carriage
 ** bots - статичекая структура, где записанна вся информация про ботов;
 ** last_live_bot - указатель на бота, над которым последний раз выполняли
 ** операцию live
-** winner - указатель на бота, который был выбран победетилем;
 ** map - структура, где хранится наша карта;
 ** carriage - список всех кареток;
 ** music_init - флаг, который определяет включенна музыка или нет;
@@ -93,6 +92,7 @@ typedef struct	s_carriage
 ** running - флаг, который определяет визуализация идет или на паузе;
 ** number_of_bots - количесвто полученных ботов;
 ** num_of_carriages - количество созданных кареток;
+** current_num_of_carriages - текущее количесвто живых кареток;
 ** cycle_check - цикл, на котором будет произведенна следующая проверка;
 ** cycle_to_die - параметр, который меняет цикл проверки кареток;
 ** number_of_lives - количество выполнений операций live за текущий период;
@@ -110,7 +110,6 @@ typedef struct	s_vm
 	t_flags			*flags;
 	t_bot			bot[4];
 	t_bot			*last_live_bot;
-	t_bot			*winner;
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
 	int				music_init;
@@ -124,6 +123,7 @@ typedef struct	s_vm
 	int				running;
 	int				number_of_bots;
 	int				num_of_carriages;
+	int				current_num_of_carriages;
 	int				cycle_check;
 	int				cycle_to_die;
 	int				number_of_lives;
