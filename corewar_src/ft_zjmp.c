@@ -19,9 +19,16 @@ void	ft_zjmp(t_vm *vm, t_carriage *carriage)
 	unsigned int	pos;
 	short			jump_len;
 	short			size;
+	char			*carry;
 
 	pos = carriage->position;
 	size = SIZE_DIR(carriage->opcode);
+	if (vm->flags->ops && !vm->flags->v)
+	{
+		carry = (carriage->carry) ? "OK" : "FAILED";
+		jump_len = (short)get_arg_from_map(vm->map, pos + 1, size);
+		ft_printf("P %4d | zjmp %d %s\n", carriage->id, jump_len, carry);
+	}
 	if (carriage->carry)
 	{
 		jump_len = (short)get_arg_from_map(vm->map, pos + 1, size) % IDX_MOD;

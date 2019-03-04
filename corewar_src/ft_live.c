@@ -28,7 +28,8 @@ static void	live_bot(t_vm *vm, int i)
 	vm->bot[i].lives_current_period++;
 	vm->bot[i].cycle_last_live = vm->current_cycle;
 	if (vm->flags->lives && !vm->flags->v)
-		ft_printf("Вывести информацию про live бота\n");
+		ft_printf("Player %d (%s) is said to be alive\n",
+		vm->bot[i].id, vm->bot[i].name);
 }
 
 void		ft_live(t_vm *vm, t_carriage *carriage)
@@ -42,6 +43,8 @@ void		ft_live(t_vm *vm, t_carriage *carriage)
 	size = SIZE_DIR(carriage->opcode);
 	argument = (int)get_arg_from_map(vm->map, carriage->position + 1, size);
 	i = 0;
+	if (vm->flags->ops && !vm->flags->v)
+		ft_printf("P %4d | live %d\n", carriage->id, argument);
 	while (i < vm->number_of_bots)
 	{
 		if (argument == -vm->bot[i].id)
