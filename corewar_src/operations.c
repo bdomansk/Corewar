@@ -17,9 +17,9 @@
 ** live (+) без визуализации
 ** ld
 ** st
-** add
+** add (+)
 ** sub
-** and (+)
+** and
 ** or
 ** xor
 ** zjmp (+)

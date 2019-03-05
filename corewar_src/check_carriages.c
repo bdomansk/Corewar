@@ -24,6 +24,15 @@
 ** будет произведенна проверка.
 */
 
+static void	show_deaths(t_vm *vm, t_carriage *carriage)
+{
+	int	cycles;
+
+	cycles = vm->current_cycle - carriage->cycle_last_live;
+	ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+	carriage->id, cycles, vm->cycle_to_die);
+}
+
 static void	free_carriages(t_vm *vm)
 {
 	t_carriage	*previous;
@@ -41,7 +50,7 @@ static void	free_carriages(t_vm *vm)
 			if (!previous)
 				vm->carriage = current;
 			if (!vm->flags->v && vm->flags->deaths)
-				ft_printf("deaths %d\n", temp->id);
+				show_deaths(vm, temp);
 			free(temp);
 		}
 		else

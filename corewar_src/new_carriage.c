@@ -28,6 +28,7 @@ void	new_carriage(t_vm *info, t_bot *parent, int position)
 	new->parent = parent;
 	new->registers[1] = -parent->id;
 	new->number_of_arguments = 0;
+	new->cycle_last_live = info->current_cycle;
 	new->alive = 0;
 	new->next = NULL;
 	if (info->carriage)

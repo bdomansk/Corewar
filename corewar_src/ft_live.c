@@ -40,6 +40,7 @@ void		ft_live(t_vm *vm, t_carriage *carriage)
 
 	carriage->alive = 1;
 	vm->number_of_lives++;
+	carriage->cycle_last_live = vm->current_cycle;
 	size = SIZE_DIR(carriage->opcode);
 	argument = (int)get_arg_from_map(vm->map, carriage->position + 1, size);
 	i = 0;

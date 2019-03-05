@@ -63,6 +63,7 @@ typedef struct	s_carriage
 	int					alive;
 	int					arg_type[3];
 	int					cycles_left;
+	int					cycle_last_live;
 	int					number_of_arguments;
 	int					registers[REG_NUMBER + 1];
 	t_bot				*parent;
