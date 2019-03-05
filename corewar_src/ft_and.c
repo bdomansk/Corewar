@@ -20,6 +20,7 @@ void		ft_and(t_vm *vm, t_carriage *carriage)
 
 	argument1 = get_arg_by_type(vm, carriage, 0);
 	argument2 = get_arg_by_type(vm, carriage, 1);
-	ft_printf("P %4d | and %d %d arg3\n", carriage->id, argument1, argument2);
+	if (!vm->flags->v)
+		ft_printf("P %4d | and %d %d arg3\n", carriage->id, argument1, argument2);
 	move_carriage(carriage);
 }

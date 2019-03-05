@@ -44,7 +44,7 @@ void		draw_map(t_vm *vm)
 	while (i < MEM_SIZE)
 	{
 		if ((car_id = check_carriage(vm, i)))
-			draw_elem(vm, i, car_id + 10);
+			draw_elem(vm, i, vm->map[i].color + 10);
 		else
 			draw_elem(vm, i, vm->map[i].color);
 		i++;
