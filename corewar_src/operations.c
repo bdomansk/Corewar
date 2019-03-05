@@ -19,7 +19,7 @@
 ** st
 ** add
 ** sub
-** and
+** and (+)
 ** or
 ** xor
 ** zjmp (+)
@@ -71,7 +71,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 10,
-		.function = &ft_live
+		.function = &ft_add
 	},
 	{
 		.name = "sub",

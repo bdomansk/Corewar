@@ -25,12 +25,10 @@ void	npause(t_vm *vm)
 		wattron(vm->info, COLOR_PAIR(4));
 		wattron(vm->info, A_BLINK);
 		mvwprintw(vm->info, 1, 3, "STOPED");
-		if (vm->music)
-			mvwprintw(vm->info, 1, 30, "MUSIC: Stoped");
+		(vm->music) ? mvwprintw(vm->info, 1, 30, "MUSIC: Stoped") : 0;
 		wattroff(vm->info, COLOR_PAIR(4));
 		wattroff(vm->info, A_BLINK);
-		if (vm->music == NULL)
-			mvwprintw(vm->info, 1, 30, "MUSIC: OFF");
+		(vm->music == NULL) ? mvwprintw(vm->info, 1, 30, "MUSIC: OFF") : 0;
 		if (check_key(getch(), vm) == ' ')
 		{
 			if (vm->music_init)

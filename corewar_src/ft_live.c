@@ -54,7 +54,7 @@ void		ft_live(t_vm *vm, t_carriage *carriage)
 		}
 		i++;
 	}
-	/*if (vm->flags->v)
-		ft_printf("Визуализация для live, смотри коммент\n");*/
+	if (vm->flags->v)
+		ft_printf("Визуализация для live, смотри коммент\n");
 	move_carriage(carriage);
 }

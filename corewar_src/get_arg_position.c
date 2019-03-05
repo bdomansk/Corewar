@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_and.c                                           :+:      :+:    :+:   */
+/*   get_arg_position.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/05 13:50:55 by bdomansk          #+#    #+#             */
-/*   Updated: 2019/03/05 13:50:56 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/03/05 16:51:17 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/03/05 16:51:19 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		ft_and(t_vm *vm, t_carriage *carriage)
+int	get_arg_position(t_carriage *carriage, int index)
 {
-	int	argument1;
-	int	argument2;
-	//int	argument3;
+	int	position;
+	int i;
 
-	argument1 = get_arg_by_type(vm, carriage, 0);
-	argument2 = get_arg_by_type(vm, carriage, 1);
-	if (!vm->flags->v)
-		ft_printf("P %4d | and %d %d arg3\n",
-		carriage->id, argument1, argument2);
-	move_carriage(carriage);
+	i = 0;
+	position = carriage->position + 1;
+	while (i < index)
+	{
+		position = position + get_size_by_type(carriage, i);
+		i++;
+	}
+	position = position % MEM_SIZE;
+	return (position);
 }

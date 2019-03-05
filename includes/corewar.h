@@ -166,6 +166,7 @@ void			visualization_init(t_vm *vm);
 void			close_visulization(t_vm *vm);
 int				check_key(int ch, t_vm *vm);
 void			draw_map(t_vm *vm);
+void			draw_period(t_vm *vm);
 void			draw_info_table(t_vm *vm);
 void			sdl_mixer_init(t_vm *vm);
 void			npause(t_vm *vm);
@@ -182,9 +183,11 @@ int				check_registers(t_vm *vm, t_carriage *carriage);
 int				get_size_by_type(t_carriage *carriage, int i);
 unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
 int				get_arg_by_type(t_vm *vm, t_carriage *carriage, int index);
+int				get_arg_position(t_carriage *carriage, int index);
 
 void			ft_live(t_vm *vm, t_carriage *carriage);
 void			ft_zjmp(t_vm *vm, t_carriage *carriage);
 void			ft_and(t_vm *vm, t_carriage *carriage);
+void			ft_add(t_vm *vm, t_carriage *carriage);
 
 #endif

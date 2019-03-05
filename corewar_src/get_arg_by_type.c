@@ -14,22 +14,6 @@
 
 extern const t_operations g_operations[16];
 
-static int	get_arg_position(t_carriage *carriage, int index)
-{
-	int	position;
-	int i;
-
-	i = 0;
-	position = carriage->position + 1;
-	while (i < index)
-	{
-		position = position + get_size_by_type(carriage, i);
-		i++;
-	}
-	position = position % MEM_SIZE;
-	return (position);
-}
-
 static int	get_arg_type_reg(t_map *map, t_carriage *carriage, int position)
 {
 	unsigned char	register_id;
