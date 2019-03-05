@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_add(char *buf, const char *need_add, int size1, int size2)
+char	*ft_add_str(char *buf, const char *need_add, int size1, int size2)
 {
 	char	*temp;
 	int		i;
