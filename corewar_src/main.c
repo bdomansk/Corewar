@@ -23,11 +23,12 @@ void		standart_output(t_vm *vm)
 			break ;
 		}
 		vm->current_cycle++;
+		if (vm->flags->cycles)
+			ft_printf("It is now cycle %d\n", vm->current_cycle);
 		perform_carriages(vm);
 		if (vm->cycle_check == vm->current_cycle)
 			check_carriages(vm);
 	}
-	ft_printf("%d\n", vm->current_cycle);
 	print_winner(vm);
 }
 

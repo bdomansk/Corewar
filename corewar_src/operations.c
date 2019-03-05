@@ -91,7 +91,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 6,
-		.function = &ft_live
+		.function = &ft_and
 	},
 	{
 		.name = "or",

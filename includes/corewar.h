@@ -64,7 +64,7 @@ typedef struct	s_carriage
 	int					arg_type[3];
 	int					cycles_left;
 	int					number_of_arguments;
-	int					register_id[REG_NUMBER + 1];
+	int					registers[REG_NUMBER + 1];
 	t_bot				*parent;
 	unsigned int		position;
 	struct s_carriage	*next;
@@ -181,8 +181,10 @@ int				check_code_type(t_vm *vm, t_carriage *carriage);
 int				check_registers(t_vm *vm, t_carriage *carriage);
 int				get_size_by_type(t_carriage *carriage, int i);
 unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
+int				get_arg_by_type(t_vm *vm, t_carriage *carriage, int index);
 
 void			ft_live(t_vm *vm, t_carriage *carriage);
 void			ft_zjmp(t_vm *vm, t_carriage *carriage);
+void			ft_and(t_vm *vm, t_carriage *carriage);
 
 #endif
