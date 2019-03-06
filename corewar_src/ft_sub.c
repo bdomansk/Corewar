@@ -32,5 +32,5 @@ void		ft_sub(t_vm *vm, t_carriage *carriage)
 	diff = carriage->registers[id_reg[0]] - carriage->registers[id_reg[1]];
 	carriage->registers[id_reg[2]] = diff;
 	carriage->carry = (diff == 0) ? 1 : 0;
-	move_carriage(carriage);
+	move_carriage(vm, carriage);
 }

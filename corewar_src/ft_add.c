@@ -32,5 +32,5 @@ void		ft_add(t_vm *vm, t_carriage *carriage)
 	sum = carriage->registers[id_reg[0]] + carriage->registers[id_reg[1]];
 	carriage->registers[id_reg[2]] = sum;
 	carriage->carry = (sum == 0) ? 1 : 0;
-	move_carriage(carriage);
+	move_carriage(vm, carriage);
 }

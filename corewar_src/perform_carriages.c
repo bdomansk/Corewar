@@ -55,7 +55,7 @@ static void	perform_carriage(t_carriage *carr, t_vm *vm)
 			if (check_code_type(vm, carr))
 				g_operations[carr->opcode - 1].function(vm, carr);
 			else
-				move_carriage(carr);
+				move_carriage(vm, carr);
 			carr->opcode = 0;
 		}
 	}

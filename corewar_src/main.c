@@ -63,6 +63,7 @@ int			main(int argc, char **argv)
 	parse_arguments(vm);
 	define_bots_id(vm);
 	fill_map(vm);
+	ft_printf("%u\n", ((unsigned int)-1) % 4096);
 	(vm->flags->v) ? visulization(vm) : standart_output(vm);
 	return (0);
 }

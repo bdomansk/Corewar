@@ -23,5 +23,5 @@ void		ft_and(t_vm *vm, t_carriage *carriage)
 	if (!vm->flags->v)
 		ft_printf("P %4d | and %d %d arg3\n",
 		carriage->id, argument1, argument2);
-	move_carriage(carriage);
+	move_carriage(vm, carriage);
 }

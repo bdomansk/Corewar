@@ -177,7 +177,7 @@ void			introducing_contestants(t_vm *vm);
 void			print_map(t_vm *vm);
 
 void			perform_carriages(t_vm *vm);
-void			move_carriage(t_carriage *carriage);
+void			move_carriage(t_vm *vm, t_carriage *carriage);
 void			check_carriages(t_vm *vm);
 
 int				check_code_type(t_vm *vm, t_carriage *carriage);

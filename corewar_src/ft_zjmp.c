@@ -35,5 +35,5 @@ void	ft_zjmp(t_vm *vm, t_carriage *carriage)
 		carriage->position = (pos + jump_len) % MEM_SIZE;
 	}
 	else
-		carriage->position = (pos + size + 1) % MEM_SIZE;
+		move_carriage(vm, carriage);
 }

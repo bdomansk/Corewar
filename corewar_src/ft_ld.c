@@ -26,5 +26,5 @@ void		ft_ld(t_vm *vm, t_carriage *carriage)
 	carriage->registers[id_reg] = value;
 	if (!vm->flags->v && vm->flags->ops)
 		ft_printf("P %4d | ld %d r%d\n", carriage->id, value, id_reg);
-	move_carriage(carriage);
+	move_carriage(vm, carriage);
 }
