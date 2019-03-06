@@ -128,6 +128,7 @@ typedef struct	s_vm
 	int				cycle_check;
 	int				cycle_to_die;
 	int				number_of_lives;
+	int				previous_lives;
 	int				number_of_checks;
 	int				available_id[5];
 	char			**argv;
@@ -190,5 +191,7 @@ void			ft_live(t_vm *vm, t_carriage *carriage);
 void			ft_zjmp(t_vm *vm, t_carriage *carriage);
 void			ft_and(t_vm *vm, t_carriage *carriage);
 void			ft_add(t_vm *vm, t_carriage *carriage);
+void			ft_sub(t_vm *vm, t_carriage *carriage);
+void			ft_ld(t_vm *vm, t_carriage *carriage);
 
 #endif

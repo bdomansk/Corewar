@@ -15,10 +15,10 @@
 /*
 ** Сделанные команды (+) :
 ** live (+) без визуализации
-** ld
+** ld (+)
 ** st
 ** add (+)
-** sub
+** sub (+)
 ** and
 ** or
 ** xor
@@ -51,7 +51,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 5,
-		.function = &ft_live
+		.function = &ft_ld
 	},
 	{
 		.name = "st",
@@ -81,7 +81,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 10,
-		.function = &ft_live
+		.function = &ft_sub
 	},
 	{
 		.name = "and",
