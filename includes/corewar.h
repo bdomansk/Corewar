@@ -189,6 +189,7 @@ int				get_size_by_type(t_carriage *carriage, int i);
 unsigned int	get_arg_from_map(t_map *map, unsigned int pos, int size);
 int				get_arg_by_type(t_vm *vm, t_carriage *carriage, int index);
 int				get_arg_position(t_carriage *carriage, int index);
+void			rewrite_map(t_vm *vm, t_carriage *carr, int value, int addr);
 
 void			ft_live(t_vm *vm, t_carriage *carriage);
 void			ft_zjmp(t_vm *vm, t_carriage *carriage);
@@ -198,5 +199,6 @@ void			ft_sub(t_vm *vm, t_carriage *carriage);
 void			ft_ld(t_vm *vm, t_carriage *carriage);
 void			ft_or(t_vm *vm, t_carriage *carriage);
 void			ft_xor(t_vm *vm, t_carriage *carriage);
+void			ft_st(t_vm *vm, t_carriage *carriage);
 
 #endif
