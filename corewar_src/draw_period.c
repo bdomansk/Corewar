@@ -14,8 +14,8 @@
 
 static int	find_max(t_vm *vm)
 {
-	int i;
-	int max;
+	int		i;
+	int		max;
 
 	max = 0;
 	i = -1;
@@ -27,18 +27,61 @@ static int	find_max(t_vm *vm)
 	return (max);
 }
 
-static void	draw_draw_period(t_vm *vm, float percent[], int n)
+static int	sum_bot_lives(t_vm *vm)
 {
-	int percent_sum;
-	int max;
-	int i;
-	int j;
+	int		live_sum;
+	int		i;
 
+	i = -1;
+	live_sum = 0;
+	while (++i < vm->number_of_bots)
+	{
+		live_sum += vm->bot[i].lives_current_period;
+	}
+	return (live_sum);
+}
+
+static void	print_previous(t_vm *vm)
+{
+	int		i;
+	int		j;
+	int		n;
+	int		prev[4];
+
+	i = -1;
+	j = 0;
+	n = (vm->number_of_bots * 6) + 2;
+	prev[0] = vm->previous_lives[0];
+	prev[1] = vm->previous_lives[1];
+	prev[2] = vm->previous_lives[2];
+	prev[3] = vm->previous_lives[3];
+	while (++i < vm->number_of_bots)
+	{
+		while (prev[i]--)
+		{
+			wattron(vm->info, COLOR_PAIR(vm->bot[i].id + 30));
+			mvwprintw(vm->info, n + 6, 4 + j, " ");
+			wattroff(vm->info, COLOR_PAIR(vm->bot[i].id + 30));
+			j++;
+		}
+	}
+}
+
+static void	calculate_period(t_vm *vm, int n, int i)
+{
+	int		percent_sum;
+	int		max;
+	int		j;
+	float	percent[4];
+
+	while (++i < vm->number_of_bots)
+		percent[i] = vm->current_lives[i];
+	i = -1;
+	j = 0;
 	percent_sum = percent[0] + percent[1] + percent[2] + percent[3];
 	max = find_max(vm);
 	percent[max] += 50 - percent_sum;
-	i = -1;
-	j = 0;
+	vm->current_lives[max] += 50 - percent_sum;
 	while (++i < vm->number_of_bots)
 	{
 		while (percent[i]--)
@@ -55,21 +98,23 @@ void		draw_period(t_vm *vm)
 {
 	int		n;
 	int		i;
-	int		sum;
-	float	percent[4];
+	int		live_sum;
 
 	n = (vm->number_of_bots * 6) + 2;
-	sum = vm->number_of_lives;
+	live_sum = sum_bot_lives(vm);
 	i = -1;
-	if (sum)
+	if (live_sum)
 	{
 		while (++i < vm->number_of_bots)
 		{
-			percent[i] = (vm->bot[i].lives_current_period * 100) / sum;
-			percent[i] = (int)((50 * percent[i]) / 100);
-			if (!(int)percent[i] && vm->bot[i].lives_current_period)
-				percent[i] = 1;
+			vm->current_lives[i] = (vm->bot[i].lives_current_period * 100)
+			/ live_sum;
+			vm->current_lives[i] = (int)((50 * vm->current_lives[i]) / 100);
+			if (!vm->current_lives[i] && vm->bot[i].lives_current_period)
+				vm->current_lives[i] = 1;
 		}
-		draw_draw_period(vm, percent, n);
+		calculate_period(vm, n, -1);
 	}
+	print_previous(vm);
 }
+

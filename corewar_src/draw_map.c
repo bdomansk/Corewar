@@ -45,6 +45,12 @@ void		draw_map(t_vm *vm)
 	{
 		if ((car_id = check_carriage(vm, i)))
 			draw_elem(vm, i, vm->map[i].color + 10);
+		else if (vm->map[i].cycles)
+		{
+			draw_elem(vm, i, vm->map[i].temp_color);
+			if (vm->running)
+				vm->map[i].cycles--;
+		}
 		else
 			draw_elem(vm, i, vm->map[i].color);
 		i++;

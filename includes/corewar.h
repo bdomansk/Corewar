@@ -53,6 +53,8 @@ typedef struct	s_map
 {
 	unsigned char	cell;
 	int				color;
+	int				temp_color;
+	int				cycles;
 }				t_map;
 
 typedef struct	s_carriage
@@ -113,6 +115,8 @@ typedef struct	s_vm
 	t_bot			*last_live_bot;
 	t_map			map[MEM_SIZE];
 	t_carriage		*carriage;
+	float			current_lives[4];
+	float			previous_lives[4];
 	int				music_init;
 	int				x;
 	int				y;
@@ -128,7 +132,7 @@ typedef struct	s_vm
 	int				cycle_check;
 	int				cycle_to_die;
 	int				number_of_lives;
-	int				previous_lives;
+	//int				previous_lives;
 	int				number_of_checks;
 	int				available_id[5];
 	char			**argv;

@@ -12,18 +12,15 @@
 
 #include "corewar.h"
 
-/*
-** Следующие 50 циклов ячейка, которая содержит код данной операции
-** будет выделена следующим способом: фон — цвет от каретки, которая выполнила
-** данную операцию; содержимое ячейки будет окрашено в белый цвет
-** и выделено жирным.
-** https://github.com/VBrazhnik/Corewar/wiki
-*/
-
 extern const t_operations g_operations[16];
 
-static void	live_bot(t_vm *vm, int i)
+static void	live_bot(t_vm *vm, int i, int position)
 {
+	if (vm->flags->v)
+	{
+	 	vm->map[position].temp_color = vm->bot[i].id + 20;
+	 	vm->map[position].cycles = 50;
+	}
 	vm->last_live_bot = &vm->bot[i];
 	vm->bot[i].lives_current_period++;
 	vm->bot[i].cycle_last_live = vm->current_cycle;
@@ -50,12 +47,10 @@ void		ft_live(t_vm *vm, t_carriage *carriage)
 	{
 		if (argument == -vm->bot[i].id)
 		{
-			live_bot(vm, i);
+			live_bot(vm, i, carriage->position);
 			break ;
 		}
 		i++;
 	}
-	if (vm->flags->v)
-		ft_printf("Визуализация для live, смотри коммент\n");
 	move_carriage(vm, carriage);
 }
