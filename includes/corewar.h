@@ -196,5 +196,7 @@ void			ft_and(t_vm *vm, t_carriage *carriage);
 void			ft_add(t_vm *vm, t_carriage *carriage);
 void			ft_sub(t_vm *vm, t_carriage *carriage);
 void			ft_ld(t_vm *vm, t_carriage *carriage);
+void			ft_or(t_vm *vm, t_carriage *carriage);
+void			ft_xor(t_vm *vm, t_carriage *carriage);
 
 #endif

@@ -19,9 +19,9 @@
 ** st
 ** add (+)
 ** sub (+)
-** and
-** or
-** xor
+** and (+)
+** or (+)
+** xor (+)
 ** zjmp (+)
 ** ldi
 ** sti
@@ -101,7 +101,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 6,
-		.function = &ft_live
+		.function = &ft_or
 	},
 	{
 		.name = "xor",
@@ -111,7 +111,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 6,
-		.function = &ft_live
+		.function = &ft_xor
 	},
 	{
 		.name = "zjmp",
