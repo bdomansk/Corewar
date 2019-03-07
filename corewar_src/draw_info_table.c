@@ -98,7 +98,7 @@ void		draw_info_table(t_vm *vm)
 	wattron(vm->info, COLOR_PAIR(10));
 	box(vm->w, 0, 0);
 	box(vm->info, 0, 0);
-	mvwhline(vm->info, 5 + (vm->number_of_bots * 6) + 5, 1, ACS_HLINE, 58);
+	mvwhline(vm->info, 5 + (vm->number_of_bots * 6) + 8, 1, ACS_HLINE, 58);
 	wattroff(vm->w, COLOR_PAIR(10));
 	wattroff(vm->info, COLOR_PAIR(10));
 }

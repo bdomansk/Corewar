@@ -18,8 +18,8 @@ static void	live_bot(t_vm *vm, int i, int position)
 {
 	if (vm->flags->v)
 	{
-	 	vm->map[position].temp_color = vm->bot[i].id + 20;
-	 	vm->map[position].cycles = 50;
+		vm->map[position].temp_color = vm->bot[i].id + 20;
+		vm->map[position].cycles = 50;
 	}
 	vm->last_live_bot = &vm->bot[i];
 	vm->bot[i].lives_current_period++;

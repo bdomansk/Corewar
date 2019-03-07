@@ -74,8 +74,8 @@ static void	calculate_period(t_vm *vm, int n, int i)
 	int		j;
 	float	percent[4];
 
-	while (++i < vm->number_of_bots)
-		percent[i] = vm->current_lives[i];
+	while (++i < 4)
+		percent[i] = (i < vm->number_of_bots) ? vm->current_lives[i] : 0;
 	i = -1;
 	j = 0;
 	percent_sum = percent[0] + percent[1] + percent[2] + percent[3];
@@ -117,4 +117,3 @@ void		draw_period(t_vm *vm)
 	}
 	print_previous(vm);
 }
-

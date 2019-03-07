@@ -52,6 +52,10 @@ static void		init_lives(t_vm *info)
 	info->previous_lives[1] = 0;
 	info->previous_lives[2] = 0;
 	info->previous_lives[3] = 0;
+	info->current_lives[0] = 0;
+	info->current_lives[1] = 0;
+	info->current_lives[2] = 0;
+	info->current_lives[3] = 0;
 }
 
 t_vm			*init_info(int argc, char **argv)

@@ -69,6 +69,7 @@ static void	update_lives_period(t_vm *vm)
 	while (i < vm->number_of_bots)
 	{
 		vm->bot[i].lives_previous_period = vm->bot[i].lives_current_period;
+		vm->previous_lives[i] = vm->current_lives[i];
 		vm->bot[i].lives_current_period = 0;
 		i++;
 	}

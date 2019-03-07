@@ -132,7 +132,6 @@ typedef struct	s_vm
 	int				cycle_check;
 	int				cycle_to_die;
 	int				number_of_lives;
-	//int				previous_lives;
 	int				number_of_checks;
 	int				available_id[5];
 	char			**argv;
