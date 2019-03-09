@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_size_by_type.c                                 :+:      :+:    :+:   */
+/*   copy_carriage_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/03 15:09:22 by bdomansk          #+#    #+#             */
-/*   Updated: 2019/03/03 15:09:24 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/03/09 16:44:12 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/03/09 16:44:13 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-extern const t_operations g_operations[16];
-
-int	get_size_by_type(t_carriage *carriage, int i)
+void	copy_carriage_data(t_carriage *dst, t_carriage *src)
 {
-	if (carriage->arg_type[i] == T_DIR)
-		return (SIZE_DIR(carriage->opcode));
-	if (carriage->arg_type[i] == T_IND)
-		return (IND_SIZE);
-	if (carriage->arg_type[i] == T_REG)
-		return (1);
-	return (0);
+	int	i;
+
+	i = 1;
+	while (i < REG_NUMBER)
+	{
+		dst->registers[i] = src->registers[i];
+		i++;
+	}
+	dst->arg_type[0] = src->arg_type[0];
+	dst->arg_type[1] = src->arg_type[2];
+	dst->arg_type[2] = src->arg_type[2];
+	dst->carry = src->carry;
+	dst->cycle_last_live = src->cycle_last_live;
+	dst->alive = src->alive;
 }

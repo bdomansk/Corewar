@@ -42,7 +42,6 @@ typedef struct	s_bot
 	int				id;
 	unsigned int	prog_size;
 	unsigned int	lives_current_period;
-	unsigned int	lives_previous_period;
 	unsigned int	cycle_last_live;
 	unsigned char	*exec_code;
 	char			name[PROG_NAME_LENGTH + 1];
@@ -164,9 +163,6 @@ unsigned int	reverse(unsigned int value, int size);
 void			define_bots_id(t_vm *info);
 void			fill_map(t_vm *info);
 
-void			new_carriage(t_vm *info, t_bot *parent, int position);
-void			free_carriage(t_vm *info, int id);
-
 void			visualization_init(t_vm *vm);
 void			close_visulization(t_vm *vm);
 int				check_key(int ch, t_vm *vm);
@@ -181,9 +177,11 @@ void			winner(t_vm *vm);
 void			introducing_contestants(t_vm *vm);
 void			print_map(t_vm *vm);
 
+void			new_carriage(t_vm *info, t_bot *parent, int position);
 void			perform_carriages(t_vm *vm);
 void			move_carriage(t_vm *vm, t_carriage *carriage);
 void			check_carriages(t_vm *vm);
+void			copy_carriage_data(t_carriage *dst, t_carriage *src);
 
 int				check_code_type(t_vm *vm, t_carriage *carriage);
 int				check_registers(t_vm *vm, t_carriage *carriage);
@@ -204,5 +202,10 @@ void			ft_xor(t_vm *vm, t_carriage *carriage);
 void			ft_st(t_vm *vm, t_carriage *carriage);
 void			ft_ldi(t_vm *vm, t_carriage *carriage);
 void			ft_sti(t_vm *vm, t_carriage *carriage);
+void			ft_fork(t_vm *vm, t_carriage *carriage);
+void			ft_lfork(t_vm *vm, t_carriage *carriage);
+void			ft_lld(t_vm *vm, t_carriage *carriage);
+void			ft_lldi(t_vm *vm, t_carriage *carriage);
+void			ft_aff(t_vm *vm, t_carriage *carriage);
 
 #endif

@@ -49,7 +49,7 @@ static void	free_carriages(t_vm *vm)
 			current = current->next;
 			vm->carriage = (!previous) ? current : vm->carriage;
 			if (previous)
-				previous->next = NULL;
+				previous->next = current;
 			if (!vm->flags->v && vm->flags->deaths)
 				show_deaths(vm, temp);
 			free(temp);
@@ -69,7 +69,6 @@ static void	update_lives_period(t_vm *vm)
 	i = 0;
 	while (i < vm->number_of_bots)
 	{
-		vm->bot[i].lives_previous_period = vm->bot[i].lives_current_period;
 		vm->previous_lives[i] = vm->current_lives[i];
 		vm->bot[i].lives_current_period = 0;
 		i++;

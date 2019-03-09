@@ -42,11 +42,9 @@ static void	show_carriage_move(t_vm *vm, t_carriage *carriage)
 void		move_carriage(t_vm *vm, t_carriage *carriage)
 {
 	int	new_position;
-	int	move_len;
 	int i;
 
 	new_position = carriage->position + 1;
-	move_len = 0;
 	i = 0;
 	while (i < carriage->number_of_arguments)
 	{

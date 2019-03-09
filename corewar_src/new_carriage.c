@@ -12,7 +12,19 @@
 
 #include "corewar.h"
 
-void	new_carriage(t_vm *info, t_bot *parent, int position)
+static void	init_registers(t_carriage *new)
+{
+	int i;
+
+	i = 0;
+	while (i < REG_NUMBER)
+	{
+		new->registers[i] = 0;
+		i++;
+	}
+}
+
+void		new_carriage(t_vm *info, t_bot *parent, int position)
 {
 	t_carriage *new;
 
@@ -26,35 +38,13 @@ void	new_carriage(t_vm *info, t_bot *parent, int position)
 	new->opcode = 0;
 	new->cycles_left = 0;
 	new->parent = parent;
-	new->registers[1] = -parent->id;
 	new->number_of_arguments = 0;
-	new->cycle_last_live = info->current_cycle;
+	new->cycle_last_live = 0;
 	new->alive = 0;
 	new->next = NULL;
+	init_registers(new);
+	new->registers[1] = -parent->id;
 	if (info->carriage)
 		new->next = info->carriage;
 	info->carriage = new;
-}
-
-void	free_carriage(t_vm *info, int id)
-{
-	t_carriage *tmp;
-
-	tmp = info->carriage;
-	if (tmp && tmp->id == id)
-	{
-		info->carriage = info->carriage->next;
-		free(tmp);
-		return ;
-	}
-	while (tmp->next)
-	{
-		if (tmp->next->id == id)
-		{
-			tmp->next = tmp->next->next;
-			free(tmp->next);
-			return ;
-		}
-		tmp = tmp->next;
-	}
 }

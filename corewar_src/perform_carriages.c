@@ -63,13 +63,12 @@ static void	perform_carriage(t_carriage *carr, t_vm *vm)
 
 void		perform_carriages(t_vm *vm)
 {
-	t_carriage	*start;
+	t_carriage	*carriage;
 
-	start = vm->carriage;
-	while (vm->carriage)
+	carriage = vm->carriage;
+	while (carriage)
 	{
-		perform_carriage(vm->carriage, vm);
-		vm->carriage = vm->carriage->next;
+		perform_carriage(carriage, vm);
+		carriage = carriage->next;
 	}
-	vm->carriage = start;
 }

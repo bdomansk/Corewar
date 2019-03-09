@@ -25,11 +25,11 @@
 ** zjmp (+)
 ** ldi (+)
 ** sti (+)
-** fork
-** lld
-** lldi
-** lfork
-** aff
+** fork (+)
+** lld (+)
+** lldi (+)
+** lfork (+)
+** aff (+)
 */
 
 const t_operations g_operations[16] = {
@@ -151,7 +151,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 2,
 		.code_type = 0,
 		.cycles = 800,
-		.function = &ft_live
+		.function = &ft_fork
 	},
 	{
 		.name = "lld",
@@ -161,7 +161,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 10,
-		.function = &ft_live
+		.function = &ft_lld
 	},
 	{
 		.name = "lldi",
@@ -171,7 +171,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 2,
 		.code_type = 1,
 		.cycles = 50,
-		.function = &ft_live
+		.function = &ft_lldi
 	},
 	{
 		.name = "lfork",
@@ -181,7 +181,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 2,
 		.code_type = 0,
 		.cycles = 1000,
-		.function = &ft_live
+		.function = &ft_lfork
 	},
 	{
 		.name = "aff",
@@ -191,6 +191,6 @@ const t_operations g_operations[16] = {
 		.dir_size = 4,
 		.code_type = 1,
 		.cycles = 2,
-		.function = &ft_live
+		.function = &ft_aff
 	}
 };
