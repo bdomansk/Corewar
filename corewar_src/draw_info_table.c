@@ -41,7 +41,6 @@ static void	draw_duck(t_vm *vm)
 	mvwprintw(vm->info, 63, 1, "  .__(.)<");
 	mvwprintw(vm->info, 64, 1, "  \\___)   \n");
 	wattroff(vm->info, COLOR_PAIR(1));
-	mvwprintw(vm->info, 63, 10, " (MAY THE FORCE BE WITH YOU)");
 }
 
 static void	draw_run(t_vm *vm)
@@ -76,8 +75,10 @@ static void	draw_info(t_vm *vm)
 	mvwprintw(vm->info, 59, 3, "R : -1\tT : -10\t\tY : -100\n");
 	mvwprintw(vm->info, n + 10, 3, "CYCLE_TO_DIE\t\t%d\n", vm->cycle_to_die);
 	mvwprintw(vm->info, n + 12, 3, "CYCLE_DELTA\t\t%d\n", CYCLE_DELTA);
-	mvwprintw(vm->info, n + 14, 3, "NBR_LIVE\t\t%d\n", NBR_LIVE);
-	mvwprintw(vm->info, n + 16, 3, "MAX_CHECKS\t\t%d\n", MAX_CHECKS);
+	mvwprintw(vm->info, n + 14, 3, "NBR_LIVE\t\t%0.5d / %d\n",
+	vm->number_of_lives, NBR_LIVE);
+	mvwprintw(vm->info, n + 16, 3, "MAX_CHECKS\t\t%0.5d / %d\n",
+	vm->number_of_checks, MAX_CHECKS);
 	mvwprintw(vm->info, n + 2, 4, "Current period :");
 	mvwprintw(vm->info, n + 5, 4, "Last period :");
 	wattron(vm->info, COLOR_PAIR(40));
@@ -98,7 +99,7 @@ void		draw_info_table(t_vm *vm)
 	wattron(vm->info, COLOR_PAIR(10));
 	box(vm->w, 0, 0);
 	box(vm->info, 0, 0);
-	mvwhline(vm->info, 5 + (vm->number_of_bots * 6) + 8, 1, ACS_HLINE, 58);
+	mvwhline(vm->info, 5 + (vm->number_of_bots * 6) + 5, 1, ACS_HLINE, 58);
 	wattroff(vm->w, COLOR_PAIR(10));
 	wattroff(vm->info, COLOR_PAIR(10));
 }

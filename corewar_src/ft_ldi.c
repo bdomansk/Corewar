@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_and.c                                           :+:      :+:    :+:   */
+/*   ft_ldi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/05 13:50:55 by bdomansk          #+#    #+#             */
-/*   Updated: 2019/03/05 13:50:56 by bdomansk         ###   ########.fr       */
+/*   Created: 2019/03/09 13:57:28 by bdomansk          #+#    #+#             */
+/*   Updated: 2019/03/09 13:57:29 by bdomansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		ft_and(t_vm *vm, t_carriage *carriage)
+void		ft_ldi(t_vm *vm, t_carriage *carriage)
 {
-	int				argument1;
-	int				argument2;
-	int				position;
-	unsigned char	reg_id;
+	int	value1;
+	int	value2;
+	int	position;
+	int	id_reg;
 
-	argument1 = get_arg_by_type(vm, carriage, 0);
-	argument2 = get_arg_by_type(vm, carriage, 1);
+	value1 = get_arg_by_type(vm, carriage, 0);
+	value2 = get_arg_by_type(vm, carriage, 1);
 	position = get_arg_position(carriage, 2);
-	reg_id = (unsigned char)get_arg_from_map(vm->map, position, 1);
-	carriage->registers[reg_id] = argument1 & argument2;
-	carriage->carry = (carriage->registers[reg_id] == 0) ? 1 : 0;
+	id_reg = (unsigned char)get_arg_from_map(vm->map, position, 1);
+	position = carriage->position - 1 + ((value1 + value2) % IDX_MOD);
+	carriage->registers[id_reg] = get_arg_from_map(vm->map, position, 4);
 	if (!vm->flags->v && vm->flags->ops)
-		ft_printf("P %4d | and %d %d r%d\n",
-		carriage->id, argument1, argument2, reg_id);
+	{
+		ft_printf("P %4d | ldi %d %d r%d\n",
+		carriage->id, value1, value2, id_reg);
+	}
 	move_carriage(vm, carriage);
 }

@@ -47,8 +47,9 @@ static void	free_carriages(t_vm *vm)
 			vm->current_num_of_carriages--;
 			temp = current;
 			current = current->next;
-			if (!previous)
-				vm->carriage = current;
+			vm->carriage = (!previous) ? current : vm->carriage;
+			if (previous)
+				previous->next = NULL;
 			if (!vm->flags->v && vm->flags->deaths)
 				show_deaths(vm, temp);
 			free(temp);

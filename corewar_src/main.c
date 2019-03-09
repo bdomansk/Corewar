@@ -43,6 +43,7 @@ void		visulization(t_vm *vm)
 		werase(vm->info);
 		draw_map(vm);
 		draw_info_table(vm);
+		draw_phrase(vm);
 		vm->current_cycle++;
 		perform_carriages(vm);
 		if (vm->cycle_check == vm->current_cycle)
@@ -51,7 +52,7 @@ void		visulization(t_vm *vm)
 		wrefresh(vm->info);
 		usleep(vm->delay / vm->cycles_in_second);
 	}
-	npause(vm);
+	winner(vm);
 	close_visulization(vm);
 }
 

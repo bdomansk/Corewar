@@ -19,7 +19,6 @@ void		ft_ld(t_vm *vm, t_carriage *carriage)
 	int	id_reg;
 
 	value = get_arg_by_type(vm, carriage, 0);
-	id_reg = get_arg_by_type(vm, carriage, 1);
 	position = get_arg_position(carriage, 1);
 	id_reg = (unsigned char)get_arg_from_map(vm->map, position, 1);
 	carriage->carry = (value == 0) ? 1 : 0;

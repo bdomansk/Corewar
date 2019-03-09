@@ -175,6 +175,8 @@ void			draw_period(t_vm *vm);
 void			draw_info_table(t_vm *vm);
 void			sdl_mixer_init(t_vm *vm);
 void			npause(t_vm *vm);
+void			draw_phrase(t_vm *vm);
+void			winner(t_vm *vm);
 
 void			introducing_contestants(t_vm *vm);
 void			print_map(t_vm *vm);
@@ -200,5 +202,6 @@ void			ft_ld(t_vm *vm, t_carriage *carriage);
 void			ft_or(t_vm *vm, t_carriage *carriage);
 void			ft_xor(t_vm *vm, t_carriage *carriage);
 void			ft_st(t_vm *vm, t_carriage *carriage);
+void			ft_ldi(t_vm *vm, t_carriage *carriage);
 
 #endif
