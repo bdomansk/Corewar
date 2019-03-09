@@ -29,6 +29,8 @@ void		ft_ldi(t_vm *vm, t_carriage *carriage)
 	{
 		ft_printf("P %4d | ldi %d %d r%d\n",
 		carriage->id, value1, value2, id_reg);
+		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
+		value1, value2, value1 + value2, position);
 	}
 	move_carriage(vm, carriage);
 }

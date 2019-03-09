@@ -203,5 +203,6 @@ void			ft_or(t_vm *vm, t_carriage *carriage);
 void			ft_xor(t_vm *vm, t_carriage *carriage);
 void			ft_st(t_vm *vm, t_carriage *carriage);
 void			ft_ldi(t_vm *vm, t_carriage *carriage);
+void			ft_sti(t_vm *vm, t_carriage *carriage);
 
 #endif

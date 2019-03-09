@@ -24,7 +24,7 @@
 ** xor (+)
 ** zjmp (+)
 ** ldi (+)
-** sti
+** sti (+)
 ** fork
 ** lld
 ** lldi
@@ -141,7 +141,7 @@ const t_operations g_operations[16] = {
 		.dir_size = 2,
 		.code_type = 1,
 		.cycles = 25,
-		.function = &ft_live
+		.function = &ft_sti
 	},
 	{
 		.name = "fork",

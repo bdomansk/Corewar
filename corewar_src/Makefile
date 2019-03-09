@@ -22,7 +22,7 @@ COREWAR_SRC = main.c init_info.c put_manual.c parse_arguments.c reverse.c \
 	ft_live.c operations.c ft_zjmp.c get_arg_from_map.c check_code_type.c \
 	check_registers.c get_size_by_type.c move_carriage.c get_arg_by_type.c \
 	ft_and.c ft_add.c get_arg_position.c draw_period.c ft_sub.c ft_ld.c \
-	ft_or.c ft_xor.c ft_st.c rewrite_map.c ft_ldi.c 
+	ft_or.c ft_xor.c ft_st.c rewrite_map.c ft_ldi.c ft_sti.c
 COREWAR_OBJ = $(COREWAR_SRC:.c=.o)
 COREWAR_HEADER = ../includes/corewar.h ../includes/op_corewar.h
 HEADER = -I ../includes
